@@ -1,0 +1,101 @@
+Design a premium SaaS web admin dashboard for Rapidry.
+Frame: 1440 × 900px (desktop browser). 
+Use 2026's most refined SaaS design pattern.
+
+LAYOUT: Left sidebar (240px) + Main content area (1200px).
+
+━━━ LEFT SIDEBAR ━━━
+Background: #0F2E2A. Full height.
+Width: 240px.
+
+Top (padding 24px):
+  Rapidry collar icon 28px #D6B97B + "RAPIDRY" DM Sans Bold 16px #F3EFE6 
+  + "Admin" DM Sans Regular 11px #9CAB9A (below brand).
+
+NAV SECTION LABELS: DM Sans Medium 10px #9CAB9A uppercase, 
+  letter-spacing 1px, padding 24px 20px 8px.
+
+Nav items (padding 10px 16px, radius 10px, margin 2px 8px):
+Active: fill rgba(214,185,123,0.12), 
+  left bar 3px #D6B97B,
+  icon #D6B97B, text DM Sans SemiBold 14px #F3EFE6.
+Hover: fill rgba(243,239,230,0.06).
+Inactive: icon #9CAB9A, text DM Sans Regular 14px #F3EFE6 at 70%.
+
+Items with icons:
+  📊 Dashboard (ACTIVE)
+  📋 Orders
+  🚴 Agents  
+  🧺 Partners
+  👥 Customers
+  📈 Analytics
+  🏷️ Coupons
+  ⚙️ Settings
+
+Bottom: Admin avatar (32px circle) + "Nayan Kumar" DM Sans SemiBold 13px 
++ "Super Admin" DM Sans Regular 11px #9CAB9A.
+Log out icon right #9CAB9A.
+
+━━━ MAIN CONTENT ━━━
+Background: #F7F5F0 (warm off-white, not pure white — feels premium).
+
+TOP BAR (height 64px, padding 0 32px):
+Background white. Border-bottom 1px #EAE4D8.
+Left: "Dashboard" Playfair Display SemiBold 22px #0F2E2A.
+      "Friday, 20 March 2026" DM Sans Regular 13px #9CAB9A.
+Right: Search bar (200px, input with magnifier), 
+  Bell icon + "3 new" badge, 
+  Avatar circle 36px gold border.
+
+KPI CARDS ROW (padding 32px, flex row gap 20px):
+4 cards. Each: Background white. Radius 16px. Shadow Elevation/2.
+Padding 20px 24px. Flex 1.
+
+Card anatomy:
+  Top row: Icon circle (40px, #F3EFE6 background, icon 20px #0F2E2A) + 
+    change badge right ("+12%" green up arrow pill OR "-5%" red).
+  Value: Playfair Display Bold 32px #0F2E2A. Margin-top 12px.
+  Label: DM Sans Regular 13px #4A5568. Margin-top 4px.
+  Bottom: Thin gold line progress bar (shows % of daily goal).
+
+Cards:
+  📋 Today's Orders: 47 (+12%)
+  🚴 Active Agents: 8 of 12 Online
+  💰 Today's Revenue: ₹14,230 (+8%)
+  ⏳ Pending Assignment: 3 (URGENT — number in red)
+
+CONTENT GRID (padding 0 32px 32px, 2-column: 65% + 35% gap 20px):
+
+LEFT — ORDERS TABLE (white card, radius 16px, shadow Elevation/2):
+  Card header: "Recent Orders" Playfair Display SemiBold 16px + 
+    "View all →" gold DM Sans SemiBold 13px right.
+  Filter pills: All | Placed | Processing | Delivered — 
+    active gold pill, inactive cream. DM Sans Medium 12px.
+  
+  Table:
+  Headers: DM Sans SemiBold 11px #9CAB9A uppercase, letter-spacing 0.5px.
+  Columns: Order ID | Customer | Service | Agent | Status | Amount | Action.
+  Row height 56px. Alternating white/#FAFAF8. 
+  Hover: left border 3px #D6B97B appears.
+  
+  Status badges (pill):
+    Placed: fill rgba(214,185,123,0.12) text #D6B97B border #D6B97B.
+    Processing: fill #EFF6FF text #1D4ED8.
+    Delivered: fill #F0FDF4 text #15803D.
+    Cancelled: fill #FEF2F2 text #991B1B.
+  
+  Action column: "Assign →" gold ghost button for unassigned rows.
+
+RIGHT — QUICK STATS + MAP:
+  Top: Online Agents card (white, radius 16px):
+    "8 agents online now" Playfair SemiBold 16px.
+    Agent list: avatar circles row (overlap style), 
+    "5 on pickup · 3 idle" DM Sans 13px #4A5568.
+  
+  Middle: Revenue sparkline card (white, radius 16px):
+    Mini line chart — gold line, cream fill below.
+    "₹14,230 today" prominent.
+  
+  Bottom: Pending Assignment URGENT card (fill #0F2E2A, radius 16px):
+    "3 orders pending agent" Playfair SemiBold 15px #F3EFE6.
+    "Assign now →" gold button.

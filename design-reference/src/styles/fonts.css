@@ -1,0 +1,55 @@
+/* 
+  REACT NATIVE FONT LOADING INSTRUCTIONS
+  ========================================
+  Do NOT use Google Fonts URL in React Native.
+  
+  Required font files to download and add to 
+  assets/fonts/ directory:
+  
+  Playfair Display:
+  - PlayfairDisplay-Regular.ttf
+  - PlayfairDisplay-SemiBold.ttf  
+  - PlayfairDisplay-Bold.ttf
+  - PlayfairDisplay-Italic.ttf
+  
+  DM Sans:
+  - DMSans-Regular.ttf
+  - DMSans-Medium.ttf
+  - DMSans-SemiBold.ttf
+  
+  Download from: fonts.google.com
+  
+  In app/_layout.tsx use:
+  
+  import { useFonts } from 'expo-font';
+  
+  const [fontsLoaded] = useFonts({
+    'PlayfairDisplay-Regular': 
+      require('../assets/fonts/PlayfairDisplay-Regular.ttf'),
+    'PlayfairDisplay-SemiBold': 
+      require('../assets/fonts/PlayfairDisplay-SemiBold.ttf'),
+    'PlayfairDisplay-Bold': 
+      require('../assets/fonts/PlayfairDisplay-Bold.ttf'),
+    'PlayfairDisplay-Italic': 
+      require('../assets/fonts/PlayfairDisplay-Italic.ttf'),
+    'DMSans-Regular': 
+      require('../assets/fonts/DMSans-Regular.ttf'),
+    'DMSans-Medium': 
+      require('../assets/fonts/DMSans-Medium.ttf'),
+    'DMSans-SemiBold': 
+      require('../assets/fonts/DMSans-SemiBold.ttf'),
+  });
+  
+  if (!fontsLoaded) return null;
+  
+  Then in StyleSheet, use these font family names:
+  fontFamily: 'PlayfairDisplay-Bold'
+  fontFamily: 'DMSans-Regular'
+  etc.
+  
+  IMPORTANT: In React Native, fontStyle: 'italic' only 
+  works if the italic variant font file is loaded.
+  Always load PlayfairDisplay-Italic.ttf separately.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap');
