@@ -1,0 +1,175 @@
+import { useLayoutEffect, useRef } from 'react';
+import { Briefcase, Flame, Footprints, ShieldCheck, Shirt, Sparkles } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SERVICES } from '../../data/brand';
+import useHeaderReveal from '../../hooks/useHeaderReveal';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const ICON_MAP = {
+  Shirt,
+  Sparkles,
+  ShieldCheck,
+  Flame,
+  Footprints,
+  Briefcase,
+};
+
+function ServiceCard({ service, onRef }) {
+  const Icon = ICON_MAP[service.icon] ?? Shirt;
+  const cardRef = useRef(null);
+  const glowRef = useRef(null);
+  const borderRef = useRef(null);
+
+  const handleMouseMove = (event) => {
+    const card = cardRef.current;
+    const glow = glowRef.current;
+    const border = borderRef.current;
+
+    if (!card || !glow || !border) {
+      return;
+    }
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    const rotateX = -((mouseY - rect.height / 2) / rect.height) * 15;
+    const rotateY = ((mouseX - rect.width / 2) / rect.width) * 15;
+    const angle = Math.atan2(mouseY - rect.height / 2, mouseX - rect.width / 2) * (180 / Math.PI);
+
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    glow.style.background = `radial-gradient(circle at ${mouseX}px ${mouseY}px, rgba(214,185,123,0.15) 0%, transparent 50%)`;
+    border.style.background = `conic-gradient(from ${angle}deg, transparent 0deg, rgba(214,185,123,0.5) 60deg, transparent 120deg)`;
+  };
+
+  const handleMouseLeave = () => {
+    const card = cardRef.current;
+    const glow = glowRef.current;
+    const border = borderRef.current;
+
+    if (!card || !glow || !border) {
+      return;
+    }
+
+    card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    glow.style.background = 'radial-gradient(circle at center, transparent 0%, transparent 60%)';
+    border.style.background = 'conic-gradient(from 0deg, transparent 0deg, transparent 120deg)';
+  };
+
+  return (
+    <article
+      ref={onRef}
+      className="h-[360px]"
+      style={{ perspective: '1000px' }}
+      onMouseLeave={handleMouseLeave}
+      onMouseMove={handleMouseMove}
+    >
+      <div
+        ref={cardRef}
+        className="relative h-full w-full rounded-[20px] [transform-style:preserve-3d] transition-[transform] duration-150 ease-out"
+      >
+        <div ref={borderRef} className="absolute inset-0 rounded-[20px] p-[1px]">
+          <div className="relative h-full w-full rounded-[19px] border border-[rgba(214,185,123,0.15)] bg-[rgba(24,63,58,0.95)] p-8 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+            <div ref={glowRef} className="pointer-events-none absolute inset-0 rounded-[19px]" />
+
+            <div className="relative z-10 flex h-full flex-col">
+              <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-gold/15 text-gold">
+                <Icon size={40} />
+              </span>
+
+              <h3 className="mt-6 font-display text-[22px] font-semibold text-white">{service.name}</h3>
+              <p className="mt-2 font-body text-[24px] font-bold text-gold">
+                {service.price}
+                <span className="text-sm font-medium text-cream/70"> {service.unit}</span>
+              </p>
+
+              <ul className="mt-5 space-y-2">
+                {service.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2 font-body text-sm text-cream/70">
+                    <span className="mt-[2px] text-gold">✓</span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <button
+                type="button"
+                className="mt-auto w-full rounded-full bg-gold px-5 py-3 font-body text-sm font-semibold uppercase tracking-[0.08em] text-forest-dark transition-transform duration-200 hover:scale-[1.02]"
+              >
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export default function Services() {
+  const sectionRef = useRef(null);
+  const cardRefs = useRef([]);
+
+  useHeaderReveal(sectionRef);
+
+  useLayoutEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return undefined;
+    }
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        cardRefs.current,
+        { y: 100, opacity: 0, rotateX: 15 },
+        {
+          y: 0,
+          rotateX: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'power3.out',
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 72%',
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section id="services" ref={sectionRef} className="bg-cream px-6 py-[100px] text-forest-dark">
+      <div className="mx-auto max-w-6xl">
+        <div className="text-center">
+          <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
+            OUR SERVICES
+          </p>
+          <h2 className="mt-4 overflow-hidden font-display text-4xl font-bold leading-tight md:text-5xl">
+            <span data-reveal="title" className="block">
+              Everything your wardrobe needs.
+            </span>
+          </h2>
+          <p data-reveal="subtitle" className="mt-4 font-body text-sm text-forest-dark/70">
+            Premium care for everyday wear, delicate fabrics, and everything in between.
+          </p>
+        </div>
+
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {SERVICES.map((service, index) => (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              onRef={(node) => {
+                cardRefs.current[index] = node;
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
