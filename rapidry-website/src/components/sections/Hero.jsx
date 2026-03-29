@@ -106,7 +106,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.15)_0%,rgba(0,0,0,0.1)_40%,rgba(0,0,0,0.5)_80%,rgba(0,0,0,0.7)_100%)]" />
       </div>
 
-      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-6 text-center">
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center md:px-6">
         <div
           ref={eyebrowRef}
           className="mb-6 inline-flex w-fit items-center rounded-full border border-white/20 bg-[rgba(0,0,0,0.3)] px-4 py-2 font-body text-[12px] font-medium text-white backdrop-blur-md"
@@ -116,7 +116,7 @@ export default function Hero() {
 
         <h1
           ref={headlineRef}
-          className="font-display text-[clamp(44px,5.5vw,76px)] font-bold leading-[1.05] text-white"
+          className="font-display text-[clamp(28px,7vw,76px)] font-bold leading-[1.05] text-white"
           style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}
         >
           Your wardrobe, <span className="italic">professionally</span> cared for<span className="text-gold">.</span>
@@ -124,14 +124,14 @@ export default function Hero() {
 
         <p
           ref={subtitleRef}
-          className="mt-6 max-w-xl font-body text-[16px] leading-[1.8] text-white/85"
+          className="mt-6 max-w-sm font-body text-[14px] leading-[1.8] text-white/85 md:max-w-xl md:text-[16px]"
           style={{ textShadow: '0 1px 10px rgba(0,0,0,0.4)' }}
         >
           From pickup to delivery - fresh clothes at your door in as fast as 3 hours. Real-time
           tracking. Zero accountability issues. Premium care for every garment.
         </p>
 
-        <div ref={ctaRef} className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div ref={ctaRef} className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
             href="#download"
             onClick={(event) => {
@@ -159,18 +159,18 @@ export default function Hero() {
           </button>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 max-w-full scale-90 sm:scale-100">
           <StartupIndiaBadge
             variant="banner"
             tone="dark"
-            className="bg-white/95 border-white/70"
+            className="max-w-full bg-white/95 border-white/70"
             text="Recognised by Startup India | DPIIT Certified"
           />
         </div>
 
-        <div ref={statsRef} className="mt-9 flex items-center justify-center font-body text-white">
+        <div ref={statsRef} className="mt-9 flex items-center justify-center gap-4 font-body text-white md:gap-8">
           <div className="text-center">
-            <div className="font-display text-[28px] font-bold text-white">3 hrs</div>
+            <div className="font-display text-[22px] font-bold text-white md:text-[28px]">3 hrs</div>
             <div className="text-[12px] text-white/60">Express Delivery</div>
           </div>
         </div>
@@ -178,7 +178,7 @@ export default function Hero() {
 
       <div
         ref={scrollHintRef}
-        className="pointer-events-none absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center opacity-0"
+        className="pointer-events-none absolute bottom-4 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center opacity-0 md:flex"
       >
         <p className="font-body text-[11px] uppercase tracking-[3px] text-white/60">scroll to discover</p>
       </div>

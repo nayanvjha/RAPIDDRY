@@ -15,13 +15,13 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" ref={sectionRef} className="bg-cream px-6 py-[100px] text-forest-dark">
-      <div className="mx-auto max-w-4xl">
+    <section id="faq" ref={sectionRef} className="bg-cream py-[100px] text-forest-dark">
+      <div className="mx-auto max-w-4xl px-4 md:px-6">
         <div className="text-center">
           <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
             FAQs
           </p>
-          <h2 className="mx-auto mt-4 max-w-[700px] overflow-hidden text-center font-display text-4xl font-bold leading-tight md:text-5xl">
+          <h2 className="mx-auto mt-4 max-w-[700px] overflow-hidden text-center font-display text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
             <span data-reveal="title" className="block">
               Questions answered.
             </span>
@@ -41,7 +41,7 @@ export default function FAQ() {
                   onClick={() => toggle(index)}
                   className="flex w-full items-center justify-between gap-4 text-left"
                 >
-                  <span className="font-body text-base font-semibold text-forest-dark">{item.question}</span>
+                  <span className="break-words font-body text-base font-semibold text-forest-dark">{item.question}</span>
                   <ChevronDown
                     size={20}
                     className={`shrink-0 text-gold transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}

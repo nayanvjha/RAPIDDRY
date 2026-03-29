@@ -38,8 +38,8 @@ export default function WaitlistOffer() {
   useHeaderReveal(sectionRef);
 
   return (
-    <section id="waitlist" ref={sectionRef} className="bg-forest-dark px-6 py-[100px] text-cream">
-      <div className="mx-auto max-w-[680px] rounded-3xl border border-gold/35 bg-[rgba(243,239,230,0.06)] p-7 backdrop-blur-[16px] md:p-10">
+    <section id="waitlist" ref={sectionRef} className="bg-forest-dark py-[100px] text-cream">
+      <div className="mx-auto max-w-[680px] rounded-3xl border border-gold/35 bg-[rgba(243,239,230,0.06)] p-5 backdrop-blur-[16px] md:p-7 lg:p-10">
         <div data-reveal="eyebrow" className="flex items-center justify-center gap-3 text-gold">
           <Gift size={20} />
           <span className="rounded-full border border-gold/40 px-3 py-1 font-body text-xs font-semibold uppercase tracking-[0.1em]">
@@ -47,7 +47,7 @@ export default function WaitlistOffer() {
           </span>
         </div>
 
-        <h2 className="mx-auto mt-6 max-w-xl overflow-hidden text-center font-display text-4xl font-bold leading-tight text-cream md:text-[42px]">
+        <h2 className="mx-auto mt-6 max-w-xl overflow-hidden text-center font-display text-3xl font-bold leading-tight text-cream md:text-4xl lg:text-[42px]">
           <span data-reveal="title" className="block">
             50% off on your first order.
           </span>

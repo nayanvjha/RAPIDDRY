@@ -24,9 +24,9 @@ function scrollToId(id) {
 export default function Footer() {
   return (
     <footer>
-      <section className="bg-gold px-6 py-[60px] text-center text-forest-dark">
+      <section className="bg-gold px-4 py-[60px] text-center text-forest-dark md:px-6">
         <div className="mx-auto max-w-3xl">
-          <h2 className="font-display text-3xl font-bold md:text-[36px]">Ready for premium laundry care?</h2>
+          <h2 className="font-display text-2xl font-bold md:text-3xl lg:text-[36px]">Ready for premium laundry care?</h2>
           <p className="mx-auto mt-4 max-w-xl font-body text-base text-forest-dark/70">
             Download the app and schedule your first pickup in under 60 seconds.
           </p>
@@ -40,8 +40,8 @@ export default function Footer() {
         </div>
       </section>
 
-      <section className="bg-forest-dark px-6 pb-10 pt-16 text-cream">
-        <div className="mx-auto max-w-6xl">
+      <section className="bg-forest-dark pb-10 pt-12 text-cream md:pt-16">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-4">
             <div>
               <div className="flex items-center gap-2 text-gold">

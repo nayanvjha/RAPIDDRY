@@ -137,14 +137,14 @@ export default function Navbar() {
           borderBottom: isScrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
         }}
       >
-        <div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-6">
+        <div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-4 md:px-6">
           <button
             className="flex items-center gap-2"
             onClick={handleBrandClick}
             aria-label="Go to top"
           >
-            <img src="/assets/IMG_2482.JPG" alt="Rapidry logo" className="h-7 w-7 rounded-sm object-contain" />
-            <span className="font-display text-[18px] font-bold tracking-[2px] text-white">RAPIDRY</span>
+            <img src="/assets/IMG_2482.JPG" alt="Rapidry logo" className="h-5 w-5 rounded-sm object-contain md:h-7 md:w-7" />
+            <span className="font-display text-[15px] font-bold tracking-[1.5px] text-white md:text-[18px] md:tracking-[2px]">RAPIDRY</span>
           </button>
 
           <div className="hidden items-center gap-7 lg:flex">

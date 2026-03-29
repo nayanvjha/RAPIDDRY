@@ -100,16 +100,16 @@ export default function StatsStrip() {
   return (
     <section
       ref={sectionRef}
-      className="w-full border-b border-t border-[#EAE4D8] bg-cream px-6 py-8"
+      className="w-full border-b border-t border-[#EAE4D8] bg-cream py-8"
     >
-      <div className="mx-auto w-full max-w-6xl">
-        <div className="flex w-full flex-wrap items-center justify-between gap-y-6 md:gap-4">
+      <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
+        <div className="grid w-full grid-cols-2 gap-y-6 md:flex md:flex-wrap md:items-center md:justify-between md:gap-4">
           {STATS.map((stat, index) => (
             <div key={stat.key} className="flex min-w-[150px] flex-1 items-center justify-center gap-3">
               <div className="text-center">
                 <div
                   ref={registerValueRef}
-                  className="font-display text-[28px] font-bold leading-none text-forest-dark md:text-[40px]"
+                  className="font-display text-[24px] font-bold leading-none text-forest-dark md:text-[40px]"
                 >
                   {stat.format(0)}
                 </div>

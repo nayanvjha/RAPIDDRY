@@ -137,13 +137,13 @@ export default function CoverageMap() {
   };
 
   return (
-    <section id="coverage" ref={sectionRef} className="bg-cream px-6 py-[100px] text-forest-dark">
-      <div className="mx-auto max-w-6xl">
+    <section id="coverage" ref={sectionRef} className="bg-cream py-[100px] text-forest-dark">
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="text-center">
           <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
             LAUNCHING SOON
           </p>
-          <h2 className="mt-4 overflow-hidden font-display text-4xl font-bold leading-tight md:text-5xl">
+          <h2 className="mt-4 overflow-hidden font-display text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
             <span data-reveal="title" className="block">
               Coming Soon in <span className="italic">Gurgaon</span>.
             </span>
@@ -154,7 +154,21 @@ export default function CoverageMap() {
         </div>
 
         <div className="mx-auto mt-12 max-w-3xl">
-          <div ref={mapFrameRef} className="relative rounded-3xl bg-forest-dark p-12">
+          <div className="rounded-2xl bg-forest-dark p-4 md:hidden">
+            <ul className="grid grid-cols-1 gap-2">
+              {sectors.map((sector) => (
+                <li
+                  key={`mobile-${sector.id}`}
+                  className="flex items-center justify-between rounded-full border border-cream/10 bg-[rgba(15,46,42,0.85)] px-3 py-2"
+                >
+                  <span className="font-body text-xs font-semibold text-cream/75">{sector.label}</span>
+                  <span className="font-body text-[10px] uppercase tracking-[0.06em] text-gold/85">Coming Soon</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div ref={mapFrameRef} className="relative hidden rounded-3xl bg-forest-dark p-12 md:block">
             <div className="grid grid-cols-6 gap-4">
               {sectors.map((sector, index) => (
                 <div
@@ -251,12 +265,12 @@ export default function CoverageMap() {
           </div>
         </div>
 
-        <div className="mx-auto mt-8 flex max-w-4xl flex-wrap items-center justify-center gap-3">
+        <div className="mx-auto mt-8 flex max-w-4xl flex-wrap items-center justify-center gap-2 md:gap-3">
           {ZONES.map((zone) => (
             <button
               key={zone}
               type="button"
-              className="rounded-full border border-gold/50 px-4 py-2 font-body text-sm text-forest-dark transition hover:bg-gold hover:text-forest-dark"
+              className="rounded-full border border-gold/50 px-3 py-1.5 font-body text-xs text-forest-dark transition hover:bg-gold hover:text-forest-dark md:px-4 md:py-2 md:text-sm"
             >
               {zone}
             </button>

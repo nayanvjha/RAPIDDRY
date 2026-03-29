@@ -62,7 +62,7 @@ function ServiceCard({ service, onRef }) {
   return (
     <article
       ref={onRef}
-      className="h-[340px]"
+      className="h-auto min-h-[320px] md:h-[340px]"
       style={{ perspective: '1000px' }}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
@@ -139,13 +139,13 @@ export default function Services() {
   }, []);
 
   return (
-    <section id="services" ref={sectionRef} className="bg-cream px-6 py-[100px] text-forest-dark">
-      <div className="mx-auto max-w-6xl">
+    <section id="services" ref={sectionRef} className="bg-cream py-[100px] text-forest-dark">
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="text-center">
           <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
             OUR SERVICES
           </p>
-          <h2 className="mt-4 overflow-hidden font-display text-4xl font-bold leading-tight md:text-5xl">
+          <h2 className="mt-4 overflow-hidden font-display text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
             <span data-reveal="title" className="block">
               Everything your wardrobe needs.
             </span>

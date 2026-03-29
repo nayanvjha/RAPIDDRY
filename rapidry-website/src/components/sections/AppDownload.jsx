@@ -141,8 +141,8 @@ export default function AppDownload() {
   }, []);
 
   return (
-    <section id="download" ref={sectionRef} className="bg-cream px-6 py-[120px] text-forest-dark">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
+    <section id="download" ref={sectionRef} className="bg-cream py-[120px] text-forest-dark">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 md:px-6 lg:grid-cols-12 lg:gap-8">
         <div className="order-2 lg:order-1 lg:col-span-5">
           <div className="hidden md:block">
             <PhoneMockupBoundary>
@@ -157,7 +157,7 @@ export default function AppDownload() {
         </div>
 
         <div className="order-1 lg:order-2 lg:col-span-7">
-          <h2 className="mt-5 overflow-hidden font-display text-4xl font-bold leading-tight md:text-5xl">
+          <h2 className="mt-5 overflow-hidden font-display text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
             <span data-reveal="title" className="block">
               Your laundry,<br />
               <span className="italic">professionally managed.</span>
@@ -184,7 +184,7 @@ export default function AppDownload() {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
             <StoreButton icon={<GooglePlayIcon />} prefix="Google Play" title="Coming Soon" />
             <StoreButton icon={<AppleIcon />} prefix="App Store" title="Coming Soon" />
           </div>

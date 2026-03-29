@@ -182,8 +182,8 @@ export default function PriceCalculator() {
   };
 
   return (
-    <section id="calculator" ref={sectionRef} className="bg-forest-dark px-6 py-[100px] text-cream">
-      <div className="mx-auto max-w-6xl">
+    <section id="calculator" ref={sectionRef} className="bg-forest-dark py-[100px] text-cream">
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="mx-auto max-w-3xl text-center">
           <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
             INSTANT ESTIMATE
@@ -193,13 +193,13 @@ export default function PriceCalculator() {
               What will your order cost?
             </span>
           </h2>
-          <p data-reveal="subtitle" className="mx-auto mt-4 max-w-xl font-body text-base text-cream/65">
+          <p data-reveal="subtitle" className="mx-auto mt-4 max-w-xl font-body text-sm md:text-base text-cream/65">
             Pick your service, set quantities, and watch your estimate update instantly before booking.
           </p>
         </div>
 
-        <div className="mx-auto mt-12 max-w-[720px] rounded-3xl border border-gold/15 bg-[rgba(243,239,230,0.06)] p-6 backdrop-blur-[20px] md:p-10">
-          <div className="-mx-2 flex gap-2 overflow-x-auto px-2 pb-2">
+        <div className="mx-auto mt-12 max-w-[720px] rounded-3xl border border-gold/15 bg-[rgba(243,239,230,0.06)] p-4 backdrop-blur-[20px] md:p-6 lg:p-10">
+          <div className="-mx-2 flex gap-2 overflow-x-auto px-2 pb-2 [scrollbar-width:none]" style={{ WebkitOverflowScrolling: 'touch' }}>
             {SERVICE_CONFIG.map((service) => {
               const isActive = service.key === activeService;
               return (
@@ -259,7 +259,7 @@ export default function PriceCalculator() {
 
           <div className="mt-10 border-t border-gold/20 pt-8 text-center">
             <p className="font-body text-sm uppercase tracking-[0.16em] text-cream/70">Estimated total</p>
-            <p className="mt-2 font-display text-5xl font-bold leading-none text-gold md:text-6xl">{formatMoney(displayTotal)}</p>
+            <p className="mt-2 font-display text-4xl font-bold leading-none text-gold md:text-5xl lg:text-6xl">{formatMoney(displayTotal)}</p>
 
             <p className="mt-4 font-body text-sm text-cream/70">
               Pickup by {pickupEstimate} • Delivered by {deliveryEstimate}

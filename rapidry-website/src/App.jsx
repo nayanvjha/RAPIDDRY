@@ -18,7 +18,7 @@ export default function App() {
       <ScrollProgress />
       <Navbar />
 
-      <main className="pt-[72px]">
+      <main className="overflow-x-hidden pt-[72px]">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
