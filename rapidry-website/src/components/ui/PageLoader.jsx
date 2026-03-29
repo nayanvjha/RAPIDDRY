@@ -44,19 +44,15 @@ export default function PageLoader() {
       return undefined;
     }
 
-    gsap.set([logo, brand, est], { opacity: 0 });
-    gsap.set(logo, { scale: 0.86 });
+    gsap.set([brand, est], { opacity: 0 });
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    tl.to(
+    tl.fromTo(
       logo,
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 0.7,
-      },
-      0.25,
+      { opacity: 0, scale: 0.7 },
+      { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' },
+      0.3,
     )
       .fromTo(
         brand,
