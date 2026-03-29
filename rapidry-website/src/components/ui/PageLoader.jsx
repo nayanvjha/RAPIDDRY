@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
-const SESSION_KEY = 'rapidry_loaded';
+const SESSION_KEY = 'rapidry_loaded_v2';
 
 export default function PageLoader() {
   const [isVisible, setIsVisible] = useState(false);
@@ -105,7 +105,7 @@ export default function PageLoader() {
     >
       <img
         ref={logoRef}
-        src="/assets/IMG_2482.JPG"
+        src="/IMG_2482.JPG?v=20260329"
         alt="Rapidry logo"
         width="80"
         height="80"
