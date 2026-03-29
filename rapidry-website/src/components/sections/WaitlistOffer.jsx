@@ -5,25 +5,11 @@ import useHeaderReveal from '../../hooks/useHeaderReveal';
 
 const SECTORS = ['Sector 29', 'Sector 31', 'Sector 43', 'Sector 44', 'Sector 47', 'Sector 56', 'Sector 57', 'Sector 66'];
 
-function computeSpots() {
-  const total = 50;
-  const launchDate = new Date('2026-03-22T00:00:00');
-  const now = new Date();
-  const dayMs = 24 * 60 * 60 * 1000;
-  const daysSince = Math.max(0, Math.floor((now.getTime() - launchDate.getTime()) / dayMs));
-  const remaining = Math.max(5, total - Math.floor(daysSince / 2));
-  const claimed = total - remaining;
-  const claimedPercent = Math.round((claimed / total) * 100);
-
-  return { total, remaining, claimed, claimedPercent };
-}
-
 export default function WaitlistOffer() {
   const emailjsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
   const emailjsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
   const emailjsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-  const { remaining, claimed, claimedPercent } = computeSpots();
   const {
     register,
     handleSubmit,
@@ -57,29 +43,18 @@ export default function WaitlistOffer() {
         <div data-reveal="eyebrow" className="flex items-center justify-center gap-3 text-gold">
           <Gift size={20} />
           <span className="rounded-full border border-gold/40 px-3 py-1 font-body text-xs font-semibold uppercase tracking-[0.1em]">
-            First Order Offer
+            Early Member Offer
           </span>
         </div>
 
         <h2 className="mx-auto mt-6 max-w-xl overflow-hidden text-center font-display text-4xl font-bold leading-tight text-cream md:text-[42px]">
           <span data-reveal="title" className="block">
-            Free first pickup for early members.
+            50% off on your first order.
           </span>
         </h2>
         <p data-reveal="subtitle" className="mt-4 text-center font-body text-sm text-cream/70">
-          Limited launch access for Gurugram neighborhoods.
+          Exclusive discount for early members in Gurugram.
         </p>
-
-        <div className="mt-8 text-center">
-          <p className="font-display text-6xl font-bold leading-none text-gold md:text-7xl">{remaining}</p>
-          <p className="mt-1 font-body text-sm uppercase tracking-[0.12em] text-cream/70">spots left</p>
-
-          <div className="mx-auto mt-5 h-2.5 w-full max-w-md rounded-full bg-forest-mid">
-            <div className="h-full rounded-full bg-gold" style={{ width: `${claimedPercent}%` }} />
-          </div>
-
-          <p className="mt-3 font-body text-sm text-cream/75">{claimed} people have already claimed this</p>
-        </div>
 
         <form className="mt-8 space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <div>

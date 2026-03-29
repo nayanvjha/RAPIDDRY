@@ -37,14 +37,51 @@ export const PhoneLoginScreen = () => {
     try {
       setIsSending(true);
       const fullPhone = `+91${sanitizedPhone}`;
-      const confirmation = await signInWithPhoneNumber(auth, fullPhone);
+      
+      // MOCK BYPASS FOR TESTING
+      // Since Firebase JS SDK requires Recaptcha which isn't easy in bare React Native
+      const testNumbers = ['+919999999999', '+918306581102'];
+      
+      if (testNumbers.includes(fullPhone)) {
+        // Simulate network delay
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        
+        // Use a mock confirmation object
+        const mockConfirmation = {
+          verificationId: 'mock-verification-id',
+          confirm: async (code: string) => {
+            if (code === '123456') {
+              return {
+                user: {
+                  getIdToken: async () => 'mock-id-token',
+                  phoneNumber: fullPhone,
+                }
+              };
+            }
+            throw new Error('Invalid mock OTP');
+          }
+        };
+        
+        setConfirmationResult(mockConfirmation as any, fullPhone);
+        navigation.navigate('OTPVerification', { phoneNumber: fullPhone });
+        return;
+      }
 
-      setConfirmationResult(confirmation, fullPhone);
-      navigation.navigate('OTPVerification', {
-        phoneNumber: fullPhone,
-      });
-    } catch (error) {
-      Alert.alert('OTP Failed', 'Unable to send OTP. Please try again.');
+      if (!auth) {
+        Alert.alert('Firebase Not Configured', 'Please add EXPO_PUBLIC_FIREBASE_* environment variables');
+        return;
+      }
+
+      // We'd normally need a RecaptchaVerifier here for Firebase Web SDK in React Native
+      // const appVerifier = new RecaptchaVerifier(auth, 'sign-in-button', { size: 'invisible' });
+      // const confirmation = await signInWithPhoneNumber(auth, fullPhone, appVerifier);
+      
+      // For now, if it's not a test number, we throw as Firebase Web SDK requires Recaptcha
+      throw new Error('Recaptcha required for real numbers');
+      
+    } catch (error: any) {
+      console.error('OTP Error:', error);
+      Alert.alert('OTP Failed', error?.message || 'Unable to send OTP. Please try again.');
     } finally {
       setIsSending(false);
     }

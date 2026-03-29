@@ -32,7 +32,7 @@ function PhoneModel({ mouseRef, wrapperRef, triggerRef }) {
       context.fillStyle = '#0F2E2A';
       context.fillRect(0, 0, canvas.width, 140);
       context.fillStyle = '#D6B97B';
-      context.font = '700 56px Playfair Display';
+      context.font = '700 56px Source Serif 4';
       context.textAlign = 'left';
       context.fillText('RAPIDRY', 48, 90);
 

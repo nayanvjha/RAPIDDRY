@@ -62,9 +62,24 @@ export const OTPVerificationScreen = () => {
       const userCredential = await confirmationResult.confirm(code);
       const idToken = await userCredential.user.getIdToken();
 
-      const response = await api.post('/auth/verify-token', { idToken });
-      const token = response.data?.data?.token;
-      const user = response.data?.data?.user;
+      let token: string;
+      let user: any;
+
+      if (idToken === 'mock-id-token') {
+        // Mock bypass — skip backend entirely for UI testing
+        token = 'mock-jwt-token';
+        user = {
+          id: 1,
+          name: 'Test User',
+          phone: phoneNumber,
+          role: 'customer',
+          is_active: true,
+        };
+      } else {
+        const response = await api.post('/auth/verify-token', { idToken });
+        token = response.data?.data?.token;
+        user = response.data?.data?.user;
+      }
 
       if (!token || !user) {
         throw new Error('Invalid auth response');
@@ -110,6 +125,11 @@ export const OTPVerificationScreen = () => {
 
   const handleResendOtp = async () => {
     if (timer > 0) {
+      return;
+    }
+
+    if (!auth) {
+      Alert.alert('Firebase Not Configured');
       return;
     }
 

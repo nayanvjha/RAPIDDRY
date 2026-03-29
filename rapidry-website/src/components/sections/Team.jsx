@@ -14,7 +14,7 @@ const TEAM_MEMBERS = [
     role: 'Founder & CEO',
     bio: 'Started Rapidry after one too many ruined shirts and a broken promise of quality from local laundry options.',
     pills: ['Founder', 'Gurgaon', 'Est. 2026'],
-    linkedin: '#',
+    linkedin: 'https://linkedin.com',
   },
   {
     id: 'nayan',
@@ -23,7 +23,7 @@ const TEAM_MEMBERS = [
     role: 'Technical Co-Founder',
     bio: 'Cybersecurity engineer and Big 4-trained consultant building the operating brain that keeps every order trackable and trusted.',
     pills: ['BIG 4', 'CYBERSECURITY'],
-    linkedin: '#',
+    linkedin: 'https://linkedin.com',
   },
   {
     id: 'open-role',

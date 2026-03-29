@@ -1,17 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import useMagnetic from '../../hooks/useMagnetic';
 
 const NAV_LINKS = [
-  { label: 'Services', id: 'services' },
-  { label: 'How It Works', id: 'how-it-works' },
-  { label: 'Coverage', id: 'coverage' },
-  { label: 'Reviews', id: 'reviews' },
-  { label: 'Download', id: 'download' },
+  { label: 'Services', id: 'services', type: 'section' },
+  { label: 'How It Works', id: 'how-it-works', type: 'section' },
+  { label: 'Coverage', id: 'coverage', type: 'section' },
+  { label: 'Reviews', id: 'reviews', type: 'section' },
+  { label: 'Download', id: 'download', type: 'section' },
+  { label: 'About Us', to: '/about', type: 'page' },
+  { label: 'Blog', to: '/blog', type: 'page' },
 ];
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -27,6 +32,11 @@ export default function Navbar() {
   };
 
   const scrollToId = (id) => {
+    if (location.pathname !== '/') {
+      navigate(`/#${id}`);
+      return;
+    }
+
     const target = document.getElementById(id);
     if (!target) {
       return;
@@ -34,6 +44,15 @@ export default function Navbar() {
 
     const y = target.getBoundingClientRect().top + window.scrollY - 72;
     window.scrollTo({ top: y, behavior: 'smooth' });
+  };
+
+  const handleBrandClick = () => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -87,6 +106,25 @@ export default function Navbar() {
     });
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    if (location.pathname !== '/' || !location.hash) {
+      return;
+    }
+
+    const id = location.hash.slice(1);
+    const timer = window.setTimeout(() => {
+      const target = document.getElementById(id);
+      if (!target) {
+        return;
+      }
+
+      const y = target.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }, 60);
+
+    return () => window.clearTimeout(timer);
+  }, [location.pathname, location.hash]);
+
   return (
     <>
       <nav
@@ -102,32 +140,34 @@ export default function Navbar() {
         <div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-6">
           <button
             className="flex items-center gap-2"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={handleBrandClick}
             aria-label="Go to top"
           >
-            <svg width="20" height="20" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-              <path
-                d="M16 20 L32 8 L48 20 L44 44 C44 44 38 38 32 38 C26 38 20 44 20 44 L16 20 Z"
-                stroke="#FFFFFF"
-                strokeWidth="1.5"
-                fill="none"
-                strokeLinejoin="round"
-              />
-              <path d="M32 8 L32 38" stroke="#FFFFFF" strokeWidth="1" strokeDasharray="2 3" />
-            </svg>
+            <img src="/assets/IMG_2482.JPG" alt="Rapidry logo" className="h-7 w-7 rounded-sm object-contain" />
             <span className="font-display text-[18px] font-bold tracking-[2px] text-white">RAPIDRY</span>
           </button>
 
           <div className="hidden items-center gap-7 lg:flex">
             {NAV_LINKS.map((link) => (
-              <button
-                key={link.id}
-                className="group relative font-body text-[14px] font-medium text-white/90 transition-opacity hover:text-white"
-                onClick={() => scrollToId(link.id)}
-              >
-                {link.label}
-                <span className="pointer-events-none absolute -bottom-1 left-1/2 h-px w-0 -translate-x-1/2 bg-white transition-all duration-300 group-hover:w-full" />
-              </button>
+              link.type === 'page' ? (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="group relative font-body text-[14px] font-medium text-white/90 transition-opacity hover:text-white"
+                >
+                  {link.label}
+                  <span className="pointer-events-none absolute -bottom-1 left-1/2 h-px w-0 -translate-x-1/2 bg-white transition-all duration-300 group-hover:w-full" />
+                </Link>
+              ) : (
+                <button
+                  key={link.id}
+                  className="group relative font-body text-[14px] font-medium text-white/90 transition-opacity hover:text-white"
+                  onClick={() => scrollToId(link.id)}
+                >
+                  {link.label}
+                  <span className="pointer-events-none absolute -bottom-1 left-1/2 h-px w-0 -translate-x-1/2 bg-white transition-all duration-300 group-hover:w-full" />
+                </button>
+              )
             ))}
           </div>
 
@@ -141,12 +181,9 @@ export default function Navbar() {
               <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
               WhatsApp us
             </a>
-            <a
-              href="#download"
-              onClick={(event) => {
-                event.preventDefault();
-                scrollToId('download');
-              }}
+            <button
+              type="button"
+              onClick={() => scrollToId('download')}
               ref={ctaMagnetic.ref}
               onMouseMove={ctaMagnetic.handleMouseMove}
               onMouseLeave={ctaMagnetic.handleMouseLeave}
@@ -154,7 +191,7 @@ export default function Navbar() {
               style={{ boxShadow: '0 8px 24px rgba(214,185,123,0.35)' }}
             >
               Get the App
-            </a>
+            </button>
           </div>
 
           <button
@@ -192,19 +229,31 @@ export default function Navbar() {
         </button>
 
         <div className="mt-10 flex flex-col gap-6">
-          {NAV_LINKS.map((link) => (
-            <button
-              key={`mobile-${link.id}`}
-              ref={registerMenuLinkRef}
-              className="text-left font-display text-[36px] leading-none text-cream"
-              onClick={() => {
-                scrollToId(link.id);
-                setIsMenuOpen(false);
-              }}
-            >
-              {link.label}
-            </button>
-          ))}
+          {NAV_LINKS.map((link) =>
+            link.type === 'page' ? (
+              <Link
+                key={`mobile-${link.to}`}
+                to={link.to}
+                ref={registerMenuLinkRef}
+                className="text-left font-display text-[36px] leading-none text-cream"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <button
+                key={`mobile-${link.id}`}
+                ref={registerMenuLinkRef}
+                className="text-left font-display text-[36px] leading-none text-cream"
+                onClick={() => {
+                  scrollToId(link.id);
+                  setIsMenuOpen(false);
+                }}
+              >
+                {link.label}
+              </button>
+            )
+          )}
           <a
             href="https://wa.me/917070311787"
             target="_blank"

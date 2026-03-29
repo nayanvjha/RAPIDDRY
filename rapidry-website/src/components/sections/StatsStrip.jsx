@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import StartupIndiaBadge from '../StartupIndiaBadge';
 
 const STATS = [
   {
@@ -99,24 +100,30 @@ export default function StatsStrip() {
   return (
     <section
       ref={sectionRef}
-      className="flex h-[130px] w-full items-center justify-center border-b border-t border-[#EAE4D8] bg-cream px-6"
+      className="w-full border-b border-t border-[#EAE4D8] bg-cream px-6 py-8"
     >
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-2 md:gap-4">
-        {STATS.map((stat, index) => (
-          <div key={stat.key} className="flex flex-1 items-center justify-center gap-3">
-            <div className="text-center">
-              <div
-                ref={registerValueRef}
-                className="font-display text-[28px] font-bold leading-none text-forest-dark md:text-[40px]"
-              >
-                {stat.format(0)}
+      <div className="mx-auto w-full max-w-6xl">
+        <div className="flex w-full flex-wrap items-center justify-between gap-y-6 md:gap-4">
+          {STATS.map((stat, index) => (
+            <div key={stat.key} className="flex min-w-[150px] flex-1 items-center justify-center gap-3">
+              <div className="text-center">
+                <div
+                  ref={registerValueRef}
+                  className="font-display text-[28px] font-bold leading-none text-forest-dark md:text-[40px]"
+                >
+                  {stat.format(0)}
+                </div>
+                <div className="mt-2 font-body text-[11px] text-slate-500 md:text-[13px]">{stat.label}</div>
               </div>
-              <div className="mt-2 font-body text-[11px] text-slate-500 md:text-[13px]">{stat.label}</div>
-            </div>
 
-            {index < STATS.length - 1 ? <span className="hidden h-[44px] w-px bg-gold/40 md:block" /> : null}
-          </div>
-        ))}
+              {index < STATS.length - 1 ? <span className="hidden h-[44px] w-px bg-gold/40 md:block" /> : null}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-7 flex justify-center">
+          <StartupIndiaBadge variant="inline" tone="dark" />
+        </div>
       </div>
     </section>
   );

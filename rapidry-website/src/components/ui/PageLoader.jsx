@@ -44,36 +44,30 @@ export default function PageLoader() {
       return undefined;
     }
 
-    const paths = logo.querySelectorAll('path');
-    paths.forEach((path) => {
-      const length = path.getTotalLength();
-      path.style.strokeDasharray = `${length}`;
-      path.style.strokeDashoffset = `${length}`;
-    });
-
-    gsap.set([brand, est], { opacity: 0 });
+    gsap.set([logo, brand, est], { opacity: 0 });
+    gsap.set(logo, { scale: 0.86 });
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     tl.to(
-      paths,
+      logo,
       {
-        strokeDashoffset: 0,
-        duration: 1,
-        stagger: 0.1,
+        opacity: 1,
+        scale: 1,
+        duration: 0.7,
       },
-      0.3,
+      0.25,
     )
       .fromTo(
         brand,
         { opacity: 0, letterSpacing: '-4px' },
         { opacity: 1, letterSpacing: '8px', duration: 0.6 },
-        1.3,
+        1.0,
       )
       .to(
         est,
         { opacity: 1, duration: 0.4 },
-        1.7,
+        1.35,
       )
       .to(
         overlay,
@@ -82,12 +76,12 @@ export default function PageLoader() {
           opacity: 0,
           duration: 0.5,
         },
-        2.0,
+        1.75,
       )
       .call(() => {
         sessionStorage.setItem(SESSION_KEY, 'true');
         setIsVisible(false);
-      }, null, 2.5);
+      }, null, 2.25);
 
     return () => {
       tl.kill();
@@ -113,22 +107,20 @@ export default function PageLoader() {
         gap: 16,
       }}
     >
-      <svg ref={logoRef} width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <path
-          d="M16 20 L32 8 L48 20 L44 44 C44 44 38 38 32 38 C26 38 20 44 20 44 L16 20 Z"
-          stroke="#D6B97B"
-          strokeWidth="1.5"
-          fill="none"
-          strokeLinejoin="round"
-        />
-        <path d="M32 8 L32 38" stroke="#D6B97B" strokeWidth="1" strokeDasharray="2 3" />
-      </svg>
+      <img
+        ref={logoRef}
+        src="/assets/IMG_2482.JPG"
+        alt="Rapidry logo"
+        width="80"
+        height="80"
+        style={{ width: 80, height: 80, objectFit: 'contain' }}
+      />
 
       <div
         ref={brandRef}
         style={{
           color: '#D6B97B',
-          fontFamily: 'Playfair Display, serif',
+          fontFamily: 'Source Serif 4, serif',
           fontWeight: 700,
           fontSize: '48px',
           lineHeight: 1,
@@ -142,7 +134,7 @@ export default function PageLoader() {
         ref={estRef}
         style={{
           color: '#F3EFE6',
-          fontFamily: 'DM Sans, sans-serif',
+          fontFamily: 'Source Serif 4, serif',
           fontSize: '12px',
           letterSpacing: '0.28em',
         }}

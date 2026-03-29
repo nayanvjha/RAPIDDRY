@@ -5,30 +5,7 @@ import useHeaderReveal from '../../hooks/useHeaderReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const COVERED_SECTORS = new Set([
-  'SEC 30',
-  'SEC 31',
-  'SEC 32',
-  'SEC 39',
-  'SEC 40',
-  'SEC 41',
-  'SEC 42',
-  'SEC 43',
-  'SEC 44',
-  'SEC 45',
-  'SEC 46',
-  'SEC 47',
-  'SEC 48',
-  'SEC 49',
-  'SEC 50',
-  'SEC 55',
-  'SEC 56',
-  'SEC 57',
-  'SEC 58',
-  'SEC 59',
-  'SEC 60',
-  'SEC 61',
-]);
+const COVERED_SECTORS = new Set([]);
 
 const ZONES = [
   'Golf Course Road',
@@ -41,7 +18,7 @@ const ZONES = [
   'Sector 66',
 ];
 
-const HOTSPOT_TARGETS = ['SEC 44', 'SEC 32', 'SEC 47'];
+const HOTSPOT_TARGETS = [];
 
 const hexClip = 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)';
 
@@ -67,15 +44,12 @@ export default function CoverageMap() {
       const row = Math.floor(index / cols);
       const col = index % cols;
       const label = `SEC ${30 + index}`;
-      const orders = 18 + ((index * 7) % 42);
       list.push({
         id: `${label}-${index}`,
         label,
         row,
         col,
         covered: COVERED_SECTORS.has(label),
-        orders,
-        avgTime: 24 + ((index * 5) % 20),
       });
     }
 
@@ -167,15 +141,15 @@ export default function CoverageMap() {
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
-            COVERAGE AREA
+            LAUNCHING SOON
           </p>
           <h2 className="mt-4 overflow-hidden font-display text-4xl font-bold leading-tight md:text-5xl">
             <span data-reveal="title" className="block">
-              Are we in your neighbourhood?
+              Coming Soon in <span className="italic">Gurgaon</span>.
             </span>
           </h2>
           <p data-reveal="subtitle" className="mt-4 font-body text-sm text-forest-dark/70">
-            See current zones and register for priority access when we expand.
+            Register below to get notified when we launch in your sector.
           </p>
         </div>
 
@@ -220,13 +194,17 @@ export default function CoverageMap() {
                     <div className={`font-body text-[11px] font-bold ${sector.covered ? 'text-cream/60' : 'text-cream/20'}`}>
                       {sector.label}
                     </div>
-                    {sector.covered ? (
-                      <div className="font-body text-[10px] text-gold/40">{sector.orders} orders</div>
-                    ) : (
-                      <div className={`font-body text-[10px] ${tooltip?.sector.id === sector.id ? 'text-gold/70' : 'text-cream/30'}`}>
-                        {tooltip?.sector.id === sector.id ? 'Coming Soon' : '—'}
-                      </div>
-                    )}
+                    <div
+                      className={`font-body text-[10px] ${
+                        sector.covered
+                          ? 'text-emerald-300/90'
+                          : tooltip?.sector.id === sector.id
+                            ? 'text-gold/80'
+                            : 'text-cream/35'
+                      }`}
+                    >
+                      {sector.covered ? 'Covered' : 'Coming Soon'}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -259,15 +237,15 @@ export default function CoverageMap() {
               );
             })}
 
-            {tooltip && tooltip.sector.covered && (
+            {tooltip && (
               <div
                 className="pointer-events-none absolute z-10 w-[210px] -translate-y-full rounded-xl border border-gold/20 bg-forest-mid p-4 text-left"
                 style={{ left: tooltip.x, top: tooltip.y }}
               >
                 <p className="font-body text-sm font-semibold text-white">{tooltip.sector.label.replace('SEC', 'Sector')}</p>
-                <p className="mt-1 font-body text-xs text-gold">{tooltip.sector.orders} orders this week</p>
-                <p className="font-body text-xs text-cream/60">Avg. delivery: {tooltip.sector.avgTime} hrs</p>
-                <p className="mt-2 font-body text-xs text-emerald-400">Agent available ✓</p>
+                <p className={`mt-2 font-body text-xs ${tooltip.sector.covered ? 'text-emerald-300' : 'text-gold/90'}`}>
+                  {tooltip.sector.covered ? 'Covered' : 'Coming Soon'}
+                </p>
               </div>
             )}
           </div>

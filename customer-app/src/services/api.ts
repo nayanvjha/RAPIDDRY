@@ -1,33 +1,18 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
-import Constants from 'expo-constants';
 
+import { resolveApiBaseUrl } from '../config/api';
 import { useAuthStore } from '../store/authStore';
 
-const getApiBaseUrl = () => {
-  const configuredUrl = process.env.EXPO_PUBLIC_API_BASE_URL;
-  if (configuredUrl) {
-    return configuredUrl;
-  }
-
-  const hostUri = Constants.expoConfig?.hostUri;
-  const host = hostUri?.split(':')[0];
-
-  if (host) {
-    return `http://${host}:3000/api/v1`;
-  }
-
-  return 'http://localhost:3000/api/v1';
-};
-
 const api = axios.create({
-  baseURL: getApiBaseUrl(),
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 api.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
+  async (config: InternalAxiosRequestConfig) => {
+    config.baseURL = await resolveApiBaseUrl();
+
     const token = useAuthStore.getState().token;
 
     if (token) {
@@ -42,6 +27,16 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
+    const requestConfig = error.config as
+      | (InternalAxiosRequestConfig & { _discoveryRetried?: boolean })
+      | undefined;
+
+    if (!error.response && requestConfig && !requestConfig._discoveryRetried) {
+      requestConfig._discoveryRetried = true;
+      requestConfig.baseURL = await resolveApiBaseUrl(true);
+      return api.request(requestConfig);
+    }
+
     if (error.response?.status === 401) {
       await useAuthStore.getState().clearAuth();
       console.warn('Unauthorized request. JWT may be expired.');

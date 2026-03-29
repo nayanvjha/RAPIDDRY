@@ -14,8 +14,8 @@ export default {
         'cream-dark': '#EAE4D8',
       },
       fontFamily: {
-        display: ['Playfair Display', 'serif'],
-        body: ['DM Sans', 'sans-serif'],
+        display: ['Source Serif 4', 'serif'],
+        body: ['Source Serif 4', 'sans-serif'],
       },
       keyframes: {
         float: {
@@ -42,7 +42,7 @@ export default {
         in        'gold-light': 'ng        'gold-pale': '#F5EDDA',fi        cream: '#F3EFE6',
     pl        'cream-dark': '# s      },
       fontFamily: {
-  l(      f//        display: [om        body: ['DM Sans', 'sans-serif'],
+  l(      f//        display: [om        body: ['Source Serif 4', 'sans-serif'],
   00;0,      },
       keyframes: {
         floht      k0;        float: {

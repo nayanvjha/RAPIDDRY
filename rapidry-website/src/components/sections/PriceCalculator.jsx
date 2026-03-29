@@ -185,7 +185,6 @@ export default function PriceCalculator() {
     <section id="calculator" ref={sectionRef} className="bg-forest-dark px-6 py-[100px] text-cream">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">INSTANT ESTIMATE</p>
           <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
             INSTANT ESTIMATE
           </p>

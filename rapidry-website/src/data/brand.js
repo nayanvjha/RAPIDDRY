@@ -14,8 +14,6 @@ export const SERVICES = [
   {
     id: 'wash-fold',
     name: 'Wash & Fold',
-    price: '₹49',
-    unit: '/kg',
     description: 'Daily wear cleaned, dried, and neatly folded for easy wardrobe restocking.',
     features: ['Eco-safe detergents', 'Fabric-separated cycles', '3-hour express delivery', 'Precision folding'],
     icon: 'Shirt',
@@ -23,8 +21,6 @@ export const SERVICES = [
   {
     id: 'wash-iron',
     name: 'Wash & Iron',
-    price: '₹79',
-    unit: '/kg',
     description: 'Fresh wash plus crisp ironing for office-ready and occasion-ready outfits.',
     features: ['Steam-finish ironing', 'Crease protection', 'Hanger-ready delivery', 'Premium garment care'],
     icon: 'Sparkles',
@@ -32,8 +28,6 @@ export const SERVICES = [
   {
     id: 'dry-clean',
     name: 'Dry Clean',
-    price: '₹199',
-    unit: '/item',
     description: 'Specialized solvent cleaning for delicate, structured, and premium garments.',
     features: ['Delicate fabric protocol', 'Stain-specific treatment', 'Color retention process', 'Luxury finish'],
     icon: 'ShieldCheck',
@@ -41,8 +35,6 @@ export const SERVICES = [
   {
     id: 'steam-iron',
     name: 'Steam Iron',
-    price: '₹29',
-    unit: '/item',
     description: 'Quick steam ironing to remove wrinkles and refresh your wardrobe instantly.',
     features: ['Quick same-day slot', 'Steam-safe pressing', 'No shine finish', 'Shape-preserving press'],
     icon: 'Flame',
@@ -50,8 +42,6 @@ export const SERVICES = [
   {
     id: 'shoe-cleaning',
     name: 'Shoe Cleaning',
-    price: '₹149',
-    unit: '/pair',
     description: 'Deep cleaning and deodorizing for sneakers, formal shoes, and daily footwear.',
     features: ['Material-aware cleaning', 'Odor neutralization', 'Sole restoration', 'Protective finishing'],
     icon: 'Footprints',
@@ -59,42 +49,16 @@ export const SERVICES = [
   {
     id: 'bag-cleaning',
     name: 'Bag Cleaning',
-    price: '₹249',
-    unit: '/item',
     description: 'Structured care for handbags, backpacks, and travel bags with premium detailing.',
     features: ['Interior vacuum care', 'Surface-safe treatment', 'Hardware polish', 'Conditioning finish'],
     icon: 'Briefcase',
   },
-];
-
-export const TESTIMONIALS = [
   {
-    quote: 'Rapidry has been flawless for my weekly office wear. Pickup is always on time and the finishing is premium.',
-    name: 'Priya Sharma',
-    location: 'Sector 44',
-    rating: 5,
-    initials: 'PS',
-  },
-  {
-    quote: 'I shifted all my dry cleaning here. Their care for jackets and formal shirts is genuinely better than local services.',
-    name: 'Rahul Verma',
-    location: 'DLF Phase 2',
-    rating: 5,
-    initials: 'RV',
-  },
-  {
-    quote: 'The app updates are clear, delivery is reliable, and every item comes back perfectly packed. Highly recommended.',
-    name: 'Ananya Singh',
-    location: 'Cyber City',
-    rating: 5,
-    initials: 'AS',
-  },
-  {
-    quote: 'Shoe cleaning quality surprised me. My sneakers looked almost new and were delivered exactly when promised.',
-    name: 'Vikram Malhotra',
-    location: 'Sector 29',
-    rating: 5,
-    initials: 'VM',
+    id: 'carpets-curtains',
+    name: 'Carpets & Curtains',
+    description: 'Deep cleaning and dust removal for carpets, curtains, and heavy home fabrics.',
+    features: ['Deep dust extraction', 'Stain treatment', 'Fabric-safe cleaning', 'Fresh finish'],
+    icon: 'LayoutGrid',
   },
 ];
 

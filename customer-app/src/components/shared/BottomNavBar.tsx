@@ -2,6 +2,7 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Feather from '@expo/vector-icons/Feather';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 
 import { COLORS, FONTS, LAYOUT, RADIUS } from '../../constants';
 
@@ -61,6 +62,24 @@ const TABS: TabItem[] = [
 ];
 
 export const BottomNavBar = ({ activeTab, onTabPress }: BottomNavBarProps) => {
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
+
+  const handleTabPress = (tab: BottomTabKey) => {
+    onTabPress?.(tab);
+
+    if (tab === activeTab) {
+      return;
+    }
+
+    if (tab === 'Orders') {
+      navigation.navigate('OrderHistory');
+    }
+
+    if (tab === 'Home') {
+      navigation.navigate('Home');
+    }
+  };
+
   return (
     <View style={styles.wrapper}>
       {TABS.map((tab) => {
@@ -69,7 +88,7 @@ export const BottomNavBar = ({ activeTab, onTabPress }: BottomNavBarProps) => {
         return (
           <Pressable
             key={tab.key}
-            onPress={() => onTabPress?.(tab.key)}
+            onPress={() => handleTabPress(tab.key)}
             style={styles.tab}
             hitSlop={8}
           >

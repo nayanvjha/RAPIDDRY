@@ -1,8 +1,9 @@
-import Constants from 'expo-constants';
 import * as SecureStore from 'expo-secure-store';
 import axios from 'axios';
 import { ConfirmationResult } from 'firebase/auth';
 import { create } from 'zustand';
+
+import { resolveApiBaseUrl } from '../config/api';
 
 type AuthUser = {
   id: string;
@@ -27,22 +28,6 @@ type AuthState = {
     confirmationResult: ConfirmationResult | null,
     phoneNumber?: string
   ) => void;
-};
-
-const getApiBaseUrl = () => {
-  const configuredUrl = process.env.EXPO_PUBLIC_API_BASE_URL;
-  if (configuredUrl) {
-    return configuredUrl;
-  }
-
-  const hostUri = Constants.expoConfig?.hostUri;
-  const host = hostUri?.split(':')[0];
-
-  if (host) {
-    return `http://${host}:3000/api/v1`;
-  }
-
-  return 'http://localhost:3000/api/v1';
 };
 
 export const useAuthStore = create<AuthState>((set, get) => ({
@@ -90,8 +75,9 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     }
 
     try {
+      const apiBaseUrl = await resolveApiBaseUrl();
       const response = await axios.get<{ success: boolean; data: AuthUser }>(
-        `${getApiBaseUrl()}/auth/me`,
+        `${apiBaseUrl}/auth/me`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -106,6 +92,30 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         isLoading: false,
       });
     } catch (error) {
+      if (axios.isAxiosError(error) && !error.response) {
+        try {
+          const refreshedBaseUrl = await resolveApiBaseUrl(true);
+          const retryResponse = await axios.get<{ success: boolean; data: AuthUser }>(
+            `${refreshedBaseUrl}/auth/me`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          set({
+            user: retryResponse.data.data,
+            token,
+            isAuthenticated: true,
+            isLoading: false,
+          });
+          return;
+        } catch {
+          // Fall through to clear stale auth state.
+        }
+      }
+
       await get().clearAuth();
     }
   },

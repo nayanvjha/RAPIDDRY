@@ -18,21 +18,22 @@ const FEATURES = [
 
 function GooglePlayIcon() {
   return (
-    <svg viewBox="0 0 64 64" className="h-8 w-8" aria-hidden="true">
-      <path fill="#34A853" d="M8 8l31 24L8 56z" />
-      <path fill="#FBBC05" d="M8 8l25 19 8-7L8 8z" />
-      <path fill="#EA4335" d="M8 56l25-19 8 7L8 56z" />
-      <path fill="#4285F4" d="M33 27l8 5-8 5-7-5z" />
-    </svg>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg"
+      alt="Google Play"
+      className="h-8 w-8"
+      loading="lazy"
+      decoding="async"
+    />
   );
 }
 
 function AppleIcon() {
   return (
-    <svg viewBox="0 0 64 64" className="h-8 w-8" aria-hidden="true">
+    <svg viewBox="0 0 384 512" className="h-8 w-8" aria-hidden="true">
       <path
         fill="#FFFFFF"
-        d="M44 35c0 9-7 19-13 19s-13-10-13-19c0-8 5-14 12-14 7 0 14 6 14 14zm-9-20c2-3 2-7 2-7s-5 1-8 4c-2 2-3 6-3 6s5 1 9-3z"
+        d="M318.7 268.5c-.2-50.3 41.1-74.5 43-75.6-23.5-34.3-60-39-72.9-39.5-31-3.1-60.5 18.3-76.2 18.3-15.8 0-40-17.9-65.8-17.4-33.8 .5-65.1 19.7-82.5 49.8-35.2 61-9 151.2 25.3 200.7 16.8 24.2 36.7 51.3 62.9 50.3 25.2-1 34.7-16.3 65.1-16.3 30.3 0 39 16.3 65.7 15.8 27.2-.5 44.3-24.7 60.9-49 19.3-28.3 27.2-55.7 27.5-57.1-.6-.2-52.7-20.2-52.9-80zm-50.3-148.1c13.9-16.9 23.2-40.4 20.6-63.9-20 .8-44.2 13.3-58.6 30.2-12.8 14.8-24 38.6-21 61.3 22.3 1.8 45.1-11.3 59-27.6z"
       />
     </svg>
   );
@@ -156,13 +157,6 @@ export default function AppDownload() {
         </div>
 
         <div className="order-1 lg:order-2 lg:col-span-7">
-          <p
-            data-reveal="eyebrow"
-            className="inline-flex w-fit items-center rounded-full border border-gold/50 bg-gold/10 px-4 py-2 font-body text-sm font-medium text-gold"
-          >
-            ★★★★★ 4.9 on Play Store
-          </p>
-
           <h2 className="mt-5 overflow-hidden font-display text-4xl font-bold leading-tight md:text-5xl">
             <span data-reveal="title" className="block">
               Your laundry,<br />
@@ -191,15 +185,15 @@ export default function AppDownload() {
           </div>
 
           <div className="mt-10 flex flex-wrap gap-4">
-            <StoreButton icon={<GooglePlayIcon />} prefix="Get it on" title="Google Play" />
-            <StoreButton icon={<AppleIcon />} prefix="Download on the" title="App Store" />
+            <StoreButton icon={<GooglePlayIcon />} prefix="Google Play" title="Coming Soon" />
+            <StoreButton icon={<AppleIcon />} prefix="App Store" title="Coming Soon" />
           </div>
 
           <div className="mt-8 flex items-center gap-4">
-            <div className="h-20 w-20 rounded-lg border border-gold/35 bg-white p-2">
-              <div className="h-full w-full rounded bg-[linear-gradient(45deg,#0F2E2A_25%,#D6B97B_25%,#D6B97B_50%,#0F2E2A_50%,#0F2E2A_75%,#D6B97B_75%,#D6B97B)] bg-[length:16px_16px]" />
+            <div className="flex h-20 w-20 items-center justify-center rounded-lg border border-gold/35 bg-white/80">
+              <span className="font-body text-[10px] font-semibold uppercase tracking-[0.08em] text-forest-dark/80">Soon</span>
             </div>
-            <p className="font-body text-sm text-forest-dark/70">Or scan to download</p>
+            <p className="font-body text-sm text-forest-dark/70">App scanning coming soon</p>
           </div>
         </div>
       </div>

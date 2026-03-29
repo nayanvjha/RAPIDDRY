@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
-  Alert,
   Animated,
   Pressable,
   ScrollView,
@@ -163,7 +162,7 @@ export const ServiceDetailScreen = () => {
   };
 
   const handleViewCart = () => {
-    Alert.alert('Cart', 'Cart screen will be connected next.');
+    navigation.navigate('PickupScheduling');
   };
 
   return (

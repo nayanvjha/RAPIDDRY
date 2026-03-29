@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ArrowDown, Phone } from 'lucide-react';
 import useMagnetic from '../../hooks/useMagnetic';
+import StartupIndiaBadge from '../StartupIndiaBadge';
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -158,18 +159,17 @@ export default function Hero() {
           </button>
         </div>
 
-        <div ref={statsRef} className="mt-9 flex flex-wrap items-center justify-center gap-6 font-body text-white md:gap-8">
-          <div>
-            <div className="font-display text-[28px] font-bold text-white">500+</div>
-            <div className="text-[12px] text-white/60">Happy Customers</div>
-          </div>
-          <span className="hidden h-10 w-px bg-white/25 sm:block" />
-          <div>
-            <div className="font-display text-[28px] font-bold text-white">4.9 ★</div>
-            <div className="text-[12px] text-white/60">App Rating</div>
-          </div>
-          <span className="hidden h-10 w-px bg-white/25 sm:block" />
-          <div>
+        <div className="mt-6">
+          <StartupIndiaBadge
+            variant="banner"
+            tone="dark"
+            className="bg-white/95 border-white/70"
+            text="Recognised by Startup India | DPIIT Certified"
+          />
+        </div>
+
+        <div ref={statsRef} className="mt-9 flex items-center justify-center font-body text-white">
+          <div className="text-center">
             <div className="font-display text-[28px] font-bold text-white">3 hrs</div>
             <div className="text-[12px] text-white/60">Express Delivery</div>
           </div>

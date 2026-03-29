@@ -14,8 +14,8 @@ export default {
         'cream-dark': '#EAE4D8',
       },
       fontFamily: {
-        display: ['Playfair Display', 'serif'],
-        body: ['DM Sans', 'sans-serif'],
+        display: ['Source Serif 4', 'serif'],
+        body: ['Source Serif 4', 'serif'],
       },
       keyframes: {
         float: {

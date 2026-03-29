@@ -1,4 +1,5 @@
 import { Instagram, Linkedin, Twitter, Heart } from 'lucide-react';
+import StartupIndiaBadge from '../StartupIndiaBadge';
 
 const SERVICE_LINKS = ['Wash & Fold', 'Wash & Iron', 'Dry Clean', 'Steam Iron', 'Shoe Care', 'Bag Care'];
 const COMPANY_LINKS = [
@@ -6,8 +7,8 @@ const COMPANY_LINKS = [
   { label: 'How It Works', id: 'how-it-works' },
   { label: 'Coverage', id: 'coverage' },
   { label: 'Careers', href: 'mailto:careers@rapidry.in' },
-  { label: 'Privacy Policy', href: '#' },
-  { label: 'Terms of Service', href: '#' },
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Terms of Service', href: '/terms' },
 ];
 
 function scrollToId(id) {
@@ -44,16 +45,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-4">
             <div>
               <div className="flex items-center gap-2 text-gold">
-                <svg width="24" height="24" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-                  <path
-                    d="M16 20 L32 8 L48 20 L44 44 C44 44 38 38 32 38 C26 38 20 44 20 44 L16 20 Z"
-                    stroke="#D6B97B"
-                    strokeWidth="1.5"
-                    fill="none"
-                    strokeLinejoin="round"
-                  />
-                  <path d="M32 8 L32 38" stroke="#D6B97B" strokeWidth="1" strokeDasharray="2 3" />
-                </svg>
+                <img src="/assets/IMG_2482.JPG" alt="Rapidry logo" className="h-7 w-7 rounded-sm object-contain" />
                 <span className="font-display text-xl font-bold tracking-[0.14em]">RAPIDRY</span>
               </div>
 
@@ -61,14 +53,16 @@ export default function Footer() {
                 Redefining garment care for the modern professional.
               </p>
 
+              <StartupIndiaBadge variant="inline" tone="light" className="mt-4" />
+
               <div className="mt-5 flex items-center gap-4 text-gold">
-                <a href="https://instagram.com" target="_blank" rel="noreferrer" className="transition hover:opacity-70" aria-label="Instagram">
+                <a href="https://instagram.com/rapidry" target="_blank" rel="noreferrer" className="transition hover:opacity-70" aria-label="Instagram">
                   <Instagram size={20} />
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="transition hover:opacity-70" aria-label="LinkedIn">
+                <a href="https://linkedin.com/company/rapidry" target="_blank" rel="noreferrer" className="transition hover:opacity-70" aria-label="LinkedIn">
                   <Linkedin size={20} />
                 </a>
-                <a href="https://twitter.com" target="_blank" rel="noreferrer" className="transition hover:opacity-70" aria-label="Twitter">
+                <a href="https://twitter.com/rapidry" target="_blank" rel="noreferrer" className="transition hover:opacity-70" aria-label="Twitter">
                   <Twitter size={20} />
                 </a>
               </div>
@@ -123,7 +117,7 @@ export default function Footer() {
                 <a href="https://wa.me/917070311787" target="_blank" rel="noreferrer" className="block font-body text-sm text-cream/70 hover:text-cream">
                   WhatsApp
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noreferrer" className="block font-body text-sm text-cream/70 hover:text-cream">
+                <a href="https://instagram.com/rapidry" target="_blank" rel="noreferrer" className="block font-body text-sm text-cream/70 hover:text-cream">
                   Instagram
                 </a>
               </div>

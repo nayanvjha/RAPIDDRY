@@ -1,3 +1,1 @@
-import { TESTIMONIALS } from './brand';
-
-export { TESTIMONIALS };
+export const TESTIMONIALS = [];

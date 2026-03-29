@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
-import { Briefcase, Flame, Footprints, ShieldCheck, Shirt, Sparkles } from 'lucide-react';
+import { Briefcase, Flame, Footprints, LayoutGrid, ShieldCheck, Shirt, Sparkles } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SERVICES } from '../../data/brand';
@@ -14,6 +14,7 @@ const ICON_MAP = {
   Flame,
   Footprints,
   Briefcase,
+  LayoutGrid,
 };
 
 function ServiceCard({ service, onRef }) {
@@ -61,7 +62,7 @@ function ServiceCard({ service, onRef }) {
   return (
     <article
       ref={onRef}
-      className="h-[360px]"
+      className="h-[340px]"
       style={{ perspective: '1000px' }}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
@@ -80,10 +81,6 @@ function ServiceCard({ service, onRef }) {
               </span>
 
               <h3 className="mt-6 font-display text-[22px] font-semibold text-white">{service.name}</h3>
-              <p className="mt-2 font-body text-[24px] font-bold text-gold">
-                {service.price}
-                <span className="text-sm font-medium text-cream/70"> {service.unit}</span>
-              </p>
 
               <ul className="mt-5 space-y-2">
                 {service.features.map((feature) => (
