@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ArrowDown, Phone } from 'lucide-react';
 import useMagnetic from '../../hooks/useMagnetic';
-import StartupIndiaBadge from '../StartupIndiaBadge';
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -127,8 +126,7 @@ export default function Hero() {
           className="mt-6 max-w-sm font-body text-[14px] leading-[1.8] text-white/85 md:max-w-xl md:text-[16px]"
           style={{ textShadow: '0 1px 10px rgba(0,0,0,0.4)' }}
         >
-          From pickup to delivery - fresh clothes at your door in as fast as 3 hours. Real-time
-          tracking. Zero accountability issues. Premium care for every garment.
+          Ironed clothes in 40 minutes. From pickup to delivery — fresh clothes at your door in as fast as 3 hours. Real-time tracking. Zero accountability issues. Premium care for every garment.
         </p>
 
         <div ref={ctaRef} className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -157,15 +155,6 @@ export default function Hero() {
           >
             How It Works <ArrowDown size={16} />
           </button>
-        </div>
-
-        <div className="mt-6 max-w-full scale-90 sm:scale-100">
-          <StartupIndiaBadge
-            variant="banner"
-            tone="dark"
-            className="max-w-full bg-white/95 border-white/70"
-            text="Recognised by Startup India | DPIIT Certified"
-          />
         </div>
 
         <div ref={statsRef} className="mt-9 flex items-center justify-center gap-4 font-body text-white md:gap-8">

@@ -81,6 +81,12 @@ function ServiceCard({ service, onRef }) {
               </span>
 
               <h3 className="mt-6 font-display text-[22px] font-semibold text-white">{service.name}</h3>
+              {service.timing && (
+                <span className="mt-1 inline-flex items-center gap-1.5 font-body text-[13px] font-medium text-gold/90">
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold/70" />
+                  {service.timing}
+                </span>
+              )}
 
               <ul className="mt-5 space-y-2">
                 {service.features.map((feature) => (

@@ -6,18 +6,54 @@ export default function AboutPage() {
     <>
       <section className="bg-cream py-[110px] text-forest-dark">
         <div className="mx-auto max-w-5xl px-4 text-center md:px-6">
-          <p className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">ABOUT US</p>
+          <p className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">OUR STORY</p>
           <h1 className="mt-4 font-display text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
-            Redefining garment care for the modern professional.
+            Born from a ruined shirt and a broken promise.
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl font-body text-base leading-relaxed text-forest-dark/75">
-            Rapidry was founded in 2026 to bring premium, accountable laundry care to Gurgaon through a modern
-            pickup-to-delivery experience. Our mission is simple: every order should feel fast, transparent, and
-            consistently high quality. We are recognised by Startup India under DPIIT, and we are building garment
-            care infrastructure people can truly trust.
-          </p>
 
-          <div className="mt-8 flex justify-center">
+          <div className="mx-auto mt-8 max-w-3xl space-y-5 text-left font-body text-base leading-relaxed text-forest-dark/80">
+            <p>
+              It started with a ₹4,200 shirt.
+            </p>
+            <p>
+              Nishant had just moved to Gurgaon for work — new city, new job, no time. He handed his
+              best office shirt to the neighbourhood laundry guy, the one everyone on the street
+              recommended. Three days later, it came back with iron burns across the collar and a
+              missing button. When he went back to ask, the response was a shrug: <em>"Hota hai, sahab."</em>
+            </p>
+            <p>
+              No receipt. No tracking. No accountability. Just a ruined shirt and a ₹200 refund
+              "for the inconvenience."
+            </p>
+            <p>
+              That evening, Nishant looked around and realized this wasn't just his problem — it was
+              everyone's. His flatmate had lost a pair of trousers. A colleague had a kurta returned
+              with someone else's stains. A friend had been waiting five days for ironing that was
+              promised in two. And yet, nobody switched — because every option felt equally broken.
+            </p>
+            <p>
+              That's when RapiDry was born. Not in a boardroom, not from a pitch deck — but from
+              genuine frustration, standing in a 6x4 laundry shop in Sector 49, holding a burnt shirt,
+              thinking: <em>"There has to be a better way."</em>
+            </p>
+            <p>
+              Nishant called up Nayan — his friend and now co-founder — and together they set out to
+              build the laundry service they wished existed. One where every garment is tagged and
+              tracked from pickup to delivery. Where ironed clothes can reach you in as little as
+              40 minutes. Where if something goes wrong — and they work hard to make sure it
+              doesn't — there's real accountability, not a shrug and ₹200.
+            </p>
+            <p>
+              Today, RapiDry serves professionals across Gurgaon with express 3-hour delivery,
+              real-time order tracking, and premium garment care — all powered by a system built from
+              scratch to make sure no one else has to go through what Nishant did.
+            </p>
+            <p className="font-semibold text-forest-dark">
+              Your clothes deserve better. And honestly? So do you.
+            </p>
+          </div>
+
+          <div className="mt-10 flex justify-center">
             <StartupIndiaBadge variant="banner" tone="dark" text="Recognised by Startup India | DPIIT Certified" />
           </div>
         </div>

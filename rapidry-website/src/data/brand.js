@@ -14,6 +14,7 @@ export const SERVICES = [
   {
     id: 'wash-fold',
     name: 'Wash & Fold',
+    timing: 'Ready in 3 hours',
     description: 'Daily wear cleaned, dried, and neatly folded for easy wardrobe restocking.',
     features: ['Eco-safe detergents', 'Fabric-separated cycles', '3-hour express delivery', 'Precision folding'],
     icon: 'Shirt',
@@ -21,6 +22,7 @@ export const SERVICES = [
   {
     id: 'wash-iron',
     name: 'Wash & Iron',
+    timing: 'Ready in 4 hours',
     description: 'Fresh wash plus crisp ironing for office-ready and occasion-ready outfits.',
     features: ['Steam-finish ironing', 'Crease protection', 'Hanger-ready delivery', 'Premium garment care'],
     icon: 'Sparkles',
@@ -28,6 +30,7 @@ export const SERVICES = [
   {
     id: 'dry-clean',
     name: 'Dry Clean',
+    timing: 'Ready in 24 hours',
     description: 'Specialized solvent cleaning for delicate, structured, and premium garments.',
     features: ['Delicate fabric protocol', 'Stain-specific treatment', 'Color retention process', 'Luxury finish'],
     icon: 'ShieldCheck',
@@ -35,6 +38,7 @@ export const SERVICES = [
   {
     id: 'steam-iron',
     name: 'Steam Iron',
+    timing: 'Ready in 40 minutes',
     description: 'Quick steam ironing to remove wrinkles and refresh your wardrobe instantly.',
     features: ['Quick same-day slot', 'Steam-safe pressing', 'No shine finish', 'Shape-preserving press'],
     icon: 'Flame',
@@ -42,6 +46,7 @@ export const SERVICES = [
   {
     id: 'shoe-cleaning',
     name: 'Shoe Cleaning',
+    timing: 'Ready in 48 hours',
     description: 'Deep cleaning and deodorizing for sneakers, formal shoes, and daily footwear.',
     features: ['Material-aware cleaning', 'Odor neutralization', 'Sole restoration', 'Protective finishing'],
     icon: 'Footprints',
@@ -49,6 +54,7 @@ export const SERVICES = [
   {
     id: 'bag-cleaning',
     name: 'Bag Cleaning',
+    timing: 'Ready in 48 hours',
     description: 'Structured care for handbags, backpacks, and travel bags with premium detailing.',
     features: ['Interior vacuum care', 'Surface-safe treatment', 'Hardware polish', 'Conditioning finish'],
     icon: 'Briefcase',
@@ -56,6 +62,7 @@ export const SERVICES = [
   {
     id: 'carpets-curtains',
     name: 'Carpets & Curtains',
+    timing: 'Ready in 72 hours',
     description: 'Deep cleaning and dust removal for carpets, curtains, and heavy home fabrics.',
     features: ['Deep dust extraction', 'Stain treatment', 'Fabric-safe cleaning', 'Fresh finish'],
     icon: 'LayoutGrid',
