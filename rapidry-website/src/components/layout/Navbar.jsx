@@ -143,8 +143,8 @@ export default function Navbar() {
             onClick={handleBrandClick}
             aria-label="Go to top"
           >
-            <img src="/IMG_new.png" alt="RAPIDRY logo" className="h-6 w-6 object-contain md:h-8 md:w-8" />
-            <span className="font-display text-[17px] font-bold tracking-[1.5px] text-white md:text-[20px] md:tracking-[2px]">RAPIDRY</span>
+            <img src="/IMG_new.png" alt="RAPIDRY logo" className="h-9 w-9 object-contain md:h-11 md:w-11" />
+            <span className="font-display text-[20px] font-bold tracking-[1.5px] text-white md:text-[24px] md:tracking-[2px]">RAPIDRY</span>
           </button>
 
           <div className="hidden items-center gap-7 lg:flex">
