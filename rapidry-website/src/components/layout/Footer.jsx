@@ -45,7 +45,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-4">
             <div>
               <div className="flex items-center gap-2 text-gold">
-                <img src="/assets/IMG_2482.JPG" alt="RAPIDRY logo" className="h-7 w-7 object-contain" />
+                <img src="/assets/rapidry-logo.svg?v=20260411" alt="RAPIDRY logo" className="h-7 w-7 object-contain" />
                 <span className="font-display text-xl font-bold tracking-[0.14em]">RAPIDRY</span>
               </div>
 
