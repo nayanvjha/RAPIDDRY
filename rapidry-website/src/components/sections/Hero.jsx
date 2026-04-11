@@ -126,8 +126,14 @@ export default function Hero() {
           className="mt-6 max-w-sm font-body text-[14px] leading-[1.8] text-white/85 md:max-w-xl md:text-[16px]"
           style={{ textShadow: '0 1px 10px rgba(0,0,0,0.4)' }}
         >
-          Ironed clothes in 40 minutes. From pickup to delivery — fresh clothes at your door in as fast as 3 hours. Real-time tracking. Zero accountability issues. Premium care for every garment.
+          Ironed clothes in 40 minutes. From pickup to delivery, cleaned clothes at your door in as fast as 3 hours. Real-time tracking. Zero accountability issues. Premium care for every garment.
         </p>
+
+        <div className="mt-5 max-w-3xl rounded-2xl border border-gold/55 bg-[rgba(15,46,42,0.78)] px-4 py-3 shadow-[0_10px_30px_rgba(214,185,123,0.22)] backdrop-blur-md md:px-6">
+          <p className="font-body text-[13px] font-semibold leading-relaxed text-gold md:text-[15px]">
+            India&apos;s first laundry to offer full refund of your clothes (clothe billed amount) if it gets damaged while servicing.
+          </p>
+        </div>
 
         <div ref={ctaRef} className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a

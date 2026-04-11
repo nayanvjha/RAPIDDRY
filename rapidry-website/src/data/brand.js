@@ -30,7 +30,7 @@ export const SERVICES = [
   {
     id: 'dry-clean',
     name: 'Dry Clean',
-    timing: 'Ready in 24 hours',
+    timing: 'Ready in 4 hours',
     description: 'Specialized solvent cleaning for delicate, structured, and premium garments.',
     features: ['Delicate fabric protocol', 'Stain-specific treatment', 'Color retention process', 'Luxury finish'],
     icon: 'ShieldCheck',
@@ -46,7 +46,7 @@ export const SERVICES = [
   {
     id: 'shoe-cleaning',
     name: 'Shoe Cleaning',
-    timing: 'Ready in 48 hours',
+    timing: 'Ready in 4 hours',
     description: 'Deep cleaning and deodorizing for sneakers, formal shoes, and daily footwear.',
     features: ['Material-aware cleaning', 'Odor neutralization', 'Sole restoration', 'Protective finishing'],
     icon: 'Footprints',
@@ -54,7 +54,7 @@ export const SERVICES = [
   {
     id: 'bag-cleaning',
     name: 'Bag Cleaning',
-    timing: 'Ready in 48 hours',
+    timing: 'Ready in 4 hours',
     description: 'Structured care for handbags, backpacks, and travel bags with premium detailing.',
     features: ['Interior vacuum care', 'Surface-safe treatment', 'Hardware polish', 'Conditioning finish'],
     icon: 'Briefcase',
@@ -62,7 +62,7 @@ export const SERVICES = [
   {
     id: 'carpets-curtains',
     name: 'Carpets & Curtains',
-    timing: 'Ready in 72 hours',
+    timing: 'Ready in 12 hours',
     description: 'Deep cleaning and dust removal for carpets, curtains, and heavy home fabrics.',
     features: ['Deep dust extraction', 'Stain treatment', 'Fabric-safe cleaning', 'Fresh finish'],
     icon: 'LayoutGrid',
@@ -71,7 +71,7 @@ export const SERVICES = [
 
 export const FAQ_DATA = [
   {
-    question: 'How do pickups work with Rapidry?',
+    question: 'How do pickups work with RAPIDRY?',
     answer: 'You can schedule pickup through the app or website in under a minute. Our rider arrives in your selected slot, verifies your order, and collects items with digital confirmation.',
   },
   {
@@ -88,7 +88,7 @@ export const FAQ_DATA = [
   },
   {
     question: 'Which areas do you currently serve?',
-    answer: 'Rapidry currently serves key Gurgaon sectors and nearby business districts. You can enter your pincode in the app to check real-time serviceability.',
+    answer: 'RAPIDRY currently serves key Gurgaon sectors and nearby business districts. You can enter your pincode in the app to check real-time serviceability.',
   },
   {
     question: 'Is there a minimum order value?',

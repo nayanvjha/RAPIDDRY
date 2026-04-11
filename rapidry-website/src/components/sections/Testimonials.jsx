@@ -8,7 +8,7 @@ export default function Testimonials() {
           <p className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">REVIEWS</p>
           <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-cream md:text-4xl lg:text-5xl">Reviews Coming Soon</h2>
           <p className="mx-auto mt-4 max-w-2xl font-body text-sm md:text-base text-cream/70">
-            We are currently collecting early customer experiences from our first Rapidry batches in Gurgaon.
+            We are currently collecting early customer experiences from our first RAPIDRY batches in Gurgaon.
             Verified ratings and detailed reviews will be published here shortly.
           </p>
         </div>

@@ -16,7 +16,7 @@ export default function BlogPage() {
         <div className="text-center">
           <p className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">BLOG</p>
           <h1 className="mt-4 font-display text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
-            Insights &amp; care tips from Rapidry
+            Insights &amp; care tips from RAPIDRY
           </h1>
           <p className="mx-auto mt-5 max-w-3xl font-body text-base text-forest-dark/72">
             Practical clothing-care advice from our operations and garment-care team, written for busy households and

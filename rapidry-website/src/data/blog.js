@@ -24,7 +24,7 @@ Press collar, cuffs, sleeves, then body panels. Use steam and moderate heat base
 ## Store properly
 Use structured hangers, leave breathing room, and button at least the top and middle button. Tight hanging leads to shoulder distortion and unnecessary creasing.
 `,
-    author: 'Rapidry Care Team',
+    author: 'RAPIDRY Care Team',
     date: '2026-03-20',
     readTime: '6 min read',
     coverImage: null,
@@ -84,7 +84,7 @@ When in doubt, ask for fabric-safe cleaning notes and finishing preferences. Goo
 
 <p>A little process discipline in monsoon season saves rewash cycles and keeps daily wear comfortable.</p>
 `,
-    author: 'Rapidry Operations',
+    author: 'RAPIDRY Operations',
     date: '2026-03-27',
     readTime: '4 min read',
     coverImage: null,

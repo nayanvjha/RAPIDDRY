@@ -105,8 +105,8 @@ export default function PageLoader() {
     >
       <img
         ref={logoRef}
-        src="/IMG_2482.JPG?v=20260329"
-        alt="Rapidry logo"
+        src="/assets/rapidry-logo.svg"
+        alt="RAPIDRY logo"
         width="80"
         height="80"
         style={{ width: 80, height: 80, objectFit: 'contain' }}

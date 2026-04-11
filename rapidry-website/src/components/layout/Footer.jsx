@@ -45,7 +45,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-4">
             <div>
               <div className="flex items-center gap-2 text-gold">
-                <img src="/assets/IMG_2482.JPG" alt="Rapidry logo" className="h-7 w-7 rounded-sm object-contain" />
+                <img src="/assets/rapidry-logo.svg" alt="RAPIDRY logo" className="h-7 w-7 rounded-sm object-contain" />
                 <span className="font-display text-xl font-bold tracking-[0.14em]">RAPIDRY</span>
               </div>
 
@@ -129,7 +129,7 @@ export default function Footer() {
           </div>
 
           <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-cream/10 pt-5 text-center md:flex-row md:text-left">
-            <p className="font-body text-[13px] text-cream/55">© 2026 Rapidry Pvt. Ltd. All rights reserved.</p>
+            <p className="font-body text-[13px] text-cream/55">© 2026 RAPIDRY Pvt. Ltd. All rights reserved.</p>
             <p className="flex items-center gap-1 font-body text-[13px] text-cream/40">
               Made with <Heart size={13} className="text-gold" fill="currentColor" /> in Gurgaon
             </p>

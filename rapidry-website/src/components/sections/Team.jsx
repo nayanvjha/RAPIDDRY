@@ -12,7 +12,7 @@ const TEAM_MEMBERS = [
     initials: 'NS',
     name: 'Nishant Sarawgi',
     role: 'Founder & CEO',
-    bio: 'Started Rapidry after one too many ruined shirts and a broken promise of quality from local laundry options.',
+    bio: 'Started RAPIDRY after one too many ruined shirts and a broken promise of quality from local laundry options.',
     pills: ['Founder', 'Gurgaon', 'Est. 2026'],
     linkedin: 'https://linkedin.com',
   },
@@ -95,7 +95,7 @@ export default function Team() {
           </p>
           <h2 className="mt-4 overflow-hidden font-display text-3xl font-bold leading-tight text-cream md:text-4xl lg:text-5xl">
             <span data-reveal="title" className="block">
-              The people behind Rapidry.
+              The people behind RAPIDRY.
             </span>
           </h2>
           <p data-reveal="subtitle" className="mt-4 font-body text-sm text-cream/70">
@@ -181,7 +181,7 @@ export default function Team() {
         <div className="relative mx-auto mt-12 max-w-[680px] rounded-2xl border border-gold/20 bg-[rgba(24,63,58,0.8)] p-5 text-center md:p-8">
           <span className="pointer-events-none absolute left-5 top-1 font-display text-7xl text-gold/20">“</span>
           <p className="font-display text-[16px] italic leading-relaxed text-cream/90 md:text-[19px]">
-            Rapidry began with two frustrations: broken trust and inconsistent care. We built this company so that every pickup
+            RAPIDRY began with two frustrations: broken trust and inconsistent care. We built this company so that every pickup
             feels dependable and every delivery feels premium, every single time.
           </p>
           <p className="mt-4 font-body text-sm font-semibold uppercase tracking-[0.08em] text-gold">— Nishant & Nayan, Founders</p>
