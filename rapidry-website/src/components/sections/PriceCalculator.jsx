@@ -162,7 +162,6 @@ export default function PriceCalculator() {
   }, [grandTotal]);
 
   const pickupEstimate = buildDateLabel(1);
-  const deliveryEstimate = buildDateLabel(3);
   const savings = grandTotal > 200 ? Math.round(grandTotal * 0.15) : 0;
 
   const itemQuantity = (serviceKey, itemName) => quantities[`${serviceKey}__${itemName}`] ?? 0;
@@ -262,7 +261,7 @@ export default function PriceCalculator() {
             <p className="mt-2 font-display text-4xl font-bold leading-none text-gold md:text-5xl lg:text-6xl">{formatMoney(displayTotal)}</p>
 
             <p className="mt-4 font-body text-sm text-cream/70">
-              Pickup by {pickupEstimate} • Delivered by {deliveryEstimate}
+              Pickup by {pickupEstimate} • Delivered in 4 hrs
             </p>
 
             {savings > 0 && (

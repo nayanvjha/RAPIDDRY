@@ -105,7 +105,7 @@ export default function PageLoader() {
     >
       <img
         ref={logoRef}
-        src="/assets/rapidry-logo.svg"
+        src="/assets/IMG_2482.JPG?v=20260411"
         alt="RAPIDRY logo"
         width="80"
         height="80"
