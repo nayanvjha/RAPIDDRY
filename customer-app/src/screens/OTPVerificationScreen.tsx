@@ -17,11 +17,37 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import { signInWithPhoneNumber } from 'firebase/auth';
+import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
 
-import { auth } from '../config/firebase';
+import { auth, firebaseConfig } from '../config/firebase';
 import { COLORS, FONTS, LAYOUT, RADIUS, SPACING, TYPOGRAPHY } from '../constants';
 import api from '../services/api';
 import { useAuthStore } from '../store/authStore';
+
+const DEV_OTP_CODE = '123456';
+
+const shouldUseDevOtpFallback = (error: any) => {
+  const code = error?.code ?? '';
+  return code === 'auth/billing-not-enabled' || code === 'auth/operation-not-allowed';
+};
+
+const buildDevConfirmation = (phoneNumber: string) => {
+  return {
+    verificationId: 'dev-verification-id',
+    confirm: async (code: string) => {
+      if (code !== DEV_OTP_CODE) {
+        throw new Error('Invalid OTP');
+      }
+
+      return {
+        user: {
+          getIdToken: async () => 'mock-id-token',
+          phoneNumber,
+        },
+      };
+    },
+  };
+};
 
 type RouteParams = {
   phoneNumber: string;
@@ -41,6 +67,7 @@ export const OTPVerificationScreen = () => {
   const [isVerifying, setIsVerifying] = useState(false);
 
   const refs = useRef<Array<TextInput | null>>([]);
+  const recaptchaVerifierRef = useRef<FirebaseRecaptchaVerifierModal | null>(null);
 
   const phoneNumber = route.params?.phoneNumber || savedPhoneNumber || '+91';
 
@@ -62,24 +89,9 @@ export const OTPVerificationScreen = () => {
       const userCredential = await confirmationResult.confirm(code);
       const idToken = await userCredential.user.getIdToken();
 
-      let token: string;
-      let user: any;
-
-      if (idToken === 'mock-id-token') {
-        // Mock bypass — skip backend entirely for UI testing
-        token = 'mock-jwt-token';
-        user = {
-          id: 1,
-          name: 'Test User',
-          phone: phoneNumber,
-          role: 'customer',
-          is_active: true,
-        };
-      } else {
-        const response = await api.post('/auth/verify-token', { idToken });
-        token = response.data?.data?.token;
-        user = response.data?.data?.user;
-      }
+      const response = await api.post('/auth/verify-token', { idToken });
+      const token = response.data?.data?.token;
+      const user = response.data?.data?.user;
 
       if (!token || !user) {
         throw new Error('Invalid auth response');
@@ -134,18 +146,36 @@ export const OTPVerificationScreen = () => {
     }
 
     try {
-      const confirmation = await signInWithPhoneNumber(auth, phoneNumber);
+      const confirmation = await signInWithPhoneNumber(
+        auth,
+        phoneNumber,
+        recaptchaVerifierRef.current ?? undefined
+      );
       setConfirmationResult(confirmation, phoneNumber);
       setDigits(['', '', '', '', '', '']);
       refs.current[0]?.focus();
       setTimer(30);
     } catch (error) {
+      if (shouldUseDevOtpFallback(error)) {
+        setConfirmationResult(buildDevConfirmation(phoneNumber) as any, phoneNumber);
+        setDigits(['', '', '', '', '', '']);
+        refs.current[0]?.focus();
+        setTimer(30);
+        Alert.alert('Dev OTP Enabled', `Use OTP ${DEV_OTP_CODE} to continue in development.`);
+        return;
+      }
+
       Alert.alert('Resend Failed', 'Unable to resend OTP. Please try again.');
     }
   };
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
+      <FirebaseRecaptchaVerifierModal
+        ref={recaptchaVerifierRef}
+        firebaseConfig={firebaseConfig}
+        attemptInvisibleVerification
+      />
       <View style={styles.container}>
         <Pressable onPress={() => navigation.goBack()} style={styles.backButton}>
           <Feather name="arrow-left" size={22} color={COLORS.forestDark} />

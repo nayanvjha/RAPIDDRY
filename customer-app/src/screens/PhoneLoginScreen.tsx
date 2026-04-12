@@ -11,15 +11,42 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Feather from '@expo/vector-icons/Feather';
 import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 import { signInWithPhoneNumber } from 'firebase/auth';
+import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
 
-import { auth } from '../config/firebase';
+import { auth, firebaseConfig } from '../config/firebase';
 import { Button } from '../components/ui';
 import { COLORS, FONTS, LAYOUT, RADIUS, SPACING, TYPOGRAPHY } from '../constants';
 import { useAuthStore } from '../store/authStore';
 
+const DEV_OTP_CODE = '123456';
+
+const shouldUseDevOtpFallback = (error: any) => {
+  const code = error?.code ?? '';
+  return code === 'auth/billing-not-enabled' || code === 'auth/operation-not-allowed';
+};
+
+const buildDevConfirmation = (phoneNumber: string) => {
+  return {
+    verificationId: 'dev-verification-id',
+    confirm: async (code: string) => {
+      if (code !== DEV_OTP_CODE) {
+        throw new Error('Invalid OTP');
+      }
+
+      return {
+        user: {
+          getIdToken: async () => 'mock-id-token',
+          phoneNumber,
+        },
+      };
+    },
+  };
+};
+
 export const PhoneLoginScreen = () => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const setConfirmationResult = useAuthStore((state) => state.setConfirmationResult);
+  const recaptchaVerifierRef = React.useRef<FirebaseRecaptchaVerifierModal | null>(null);
 
   const [phone, setPhone] = useState('');
   const [isFocused, setIsFocused] = useState(false);
@@ -37,49 +64,28 @@ export const PhoneLoginScreen = () => {
     try {
       setIsSending(true);
       const fullPhone = `+91${sanitizedPhone}`;
-      
-      // MOCK BYPASS FOR TESTING
-      // Since Firebase JS SDK requires Recaptcha which isn't easy in bare React Native
-      const testNumbers = ['+919999999999', '+918306581102'];
-      
-      if (testNumbers.includes(fullPhone)) {
-        // Simulate network delay
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        
-        // Use a mock confirmation object
-        const mockConfirmation = {
-          verificationId: 'mock-verification-id',
-          confirm: async (code: string) => {
-            if (code === '123456') {
-              return {
-                user: {
-                  getIdToken: async () => 'mock-id-token',
-                  phoneNumber: fullPhone,
-                }
-              };
-            }
-            throw new Error('Invalid mock OTP');
-          }
-        };
-        
-        setConfirmationResult(mockConfirmation as any, fullPhone);
-        navigation.navigate('OTPVerification', { phoneNumber: fullPhone });
-        return;
-      }
 
       if (!auth) {
         Alert.alert('Firebase Not Configured', 'Please add EXPO_PUBLIC_FIREBASE_* environment variables');
         return;
       }
-
-      // We'd normally need a RecaptchaVerifier here for Firebase Web SDK in React Native
-      // const appVerifier = new RecaptchaVerifier(auth, 'sign-in-button', { size: 'invisible' });
-      // const confirmation = await signInWithPhoneNumber(auth, fullPhone, appVerifier);
-      
-      // For now, if it's not a test number, we throw as Firebase Web SDK requires Recaptcha
-      throw new Error('Recaptcha required for real numbers');
+        const confirmation = await signInWithPhoneNumber(
+          auth,
+          fullPhone,
+          recaptchaVerifierRef.current ?? undefined
+        );
+        setConfirmationResult(confirmation, fullPhone);
+        navigation.navigate('OTPVerification', { phoneNumber: fullPhone });
       
     } catch (error: any) {
+      if (shouldUseDevOtpFallback(error)) {
+        const fullPhone = `+91${sanitizedPhone}`;
+        setConfirmationResult(buildDevConfirmation(fullPhone) as any, fullPhone);
+        Alert.alert('Dev OTP Enabled', `Use OTP ${DEV_OTP_CODE} to continue in development.`);
+        navigation.navigate('OTPVerification', { phoneNumber: fullPhone });
+        return;
+      }
+
       console.error('OTP Error:', error);
       Alert.alert('OTP Failed', error?.message || 'Unable to send OTP. Please try again.');
     } finally {
@@ -89,6 +95,11 @@ export const PhoneLoginScreen = () => {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
+      <FirebaseRecaptchaVerifierModal
+        ref={recaptchaVerifierRef}
+        firebaseConfig={firebaseConfig}
+        attemptInvisibleVerification
+      />
       <View style={styles.container}>
         <Pressable onPress={() => navigation.goBack()} style={styles.backButton}>
           <Feather name="arrow-left" size={22} color={COLORS.forestDark} />

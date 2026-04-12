@@ -220,7 +220,7 @@ export const CartReviewScreen = () => {
           <View style={styles.card}>
             <View style={styles.cardHeaderRow}>
               <LabelL style={styles.cardTitle}>Delivery Address</LabelL>
-              <Pressable>
+              <Pressable onPress={() => navigation.navigate('AddressScreen')}>
                 <BodyM style={styles.linkText}>Change</BodyM>
               </Pressable>
             </View>
@@ -240,7 +240,11 @@ export const CartReviewScreen = () => {
             ) : (
               <View style={styles.addressEmptyWrap}>
                 <BodyM style={styles.addressEmptyText}>Add an address</BodyM>
-                <Button fullWidth={false} variant="secondary">
+                <Button
+                  fullWidth={false}
+                  variant="secondary"
+                  onPress={() => navigation.navigate('AddressScreen')}
+                >
                   Add Address
                 </Button>
               </View>

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import Feather from '@expo/vector-icons/Feather';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 
 import { COLORS, FONTS, LAYOUT, RADIUS } from '../../constants';
 
-export type BottomTabKey = 'Home' | 'Services' | 'Orders' | 'Track' | 'Profile';
+export type BottomTabKey = 'Home' | 'Services' | 'Orders' | 'Notifications' | 'Profile';
 
 type BottomNavBarProps = {
   activeTab: BottomTabKey;
@@ -46,10 +46,10 @@ const TABS: TabItem[] = [
     ),
   },
   {
-    key: 'Track',
-    label: 'Track',
+    key: 'Notifications',
+    label: 'Notifications',
     renderIcon: (active) => (
-      <Feather name="map-pin" size={20} color={active ? COLORS.forestDark : COLORS.textMuted} />
+      <Feather name="bell" size={20} color={active ? COLORS.forestDark : COLORS.textMuted} />
     ),
   },
   {
@@ -77,6 +77,18 @@ export const BottomNavBar = ({ activeTab, onTabPress }: BottomNavBarProps) => {
 
     if (tab === 'Home') {
       navigation.navigate('Home');
+    }
+
+    if (tab === 'Profile') {
+      navigation.navigate('Account');
+    }
+
+    if (tab === 'Services') {
+      navigation.navigate('Home');
+    }
+
+    if (tab === 'Notifications') {
+      Alert.alert('Notifications', 'Coming soon');
     }
   };
 

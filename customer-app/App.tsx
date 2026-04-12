@@ -6,6 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { COLORS } from './src/constants';
 import { HomeScreen } from './src/screens/HomeScreen';
+import { AccountScreen } from './src/screens/AccountScreen';
+import { AddressScreen } from './src/screens/AddressScreen';
 import { CartReviewScreen } from './src/screens/CartReviewScreen';
 import { OTPVerificationScreen } from './src/screens/OTPVerificationScreen';
 import { OrderConfirmedScreen } from './src/screens/OrderConfirmedScreen';
@@ -51,6 +53,8 @@ export type RootStackParamList = {
     orderId: string;
   };
   OrderHistory: undefined;
+  Account: undefined;
+  AddressScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -93,6 +97,8 @@ export default function App() {
           <Stack.Screen name="OrderConfirmed" component={OrderConfirmedScreen} />
           <Stack.Screen name="OrderTracking" component={OrderTrackingScreen} />
           <Stack.Screen name="OrderHistory" component={OrderHistoryScreen} />
+          <Stack.Screen name="Account" component={AccountScreen} />
+          <Stack.Screen name="AddressScreen" component={AddressScreen} />
         </Stack.Navigator>
       </NavigationContainer>
       <StatusBar style="dark" />
