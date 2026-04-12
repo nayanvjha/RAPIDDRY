@@ -173,9 +173,9 @@ export default function Navbar() {
 
           <div className="hidden items-center gap-4 lg:flex">
             <a
-              href="https://wa.me/917070311787"
+              href="https://wa.me/917667625880"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 font-body text-sm text-white/90 hover:text-white"
             >
               <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
@@ -255,9 +255,9 @@ export default function Navbar() {
             )
           )}
           <a
-            href="https://wa.me/917070311787"
+            href="https://wa.me/917667625880"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="mt-4 text-left font-body text-lg text-gold"
             onClick={() => setIsMenuOpen(false)}
           >

@@ -114,8 +114,8 @@ export default function Footer() {
                 <a href="mailto:enquiries@rapidry.in" className="block font-body text-sm text-gold hover:opacity-80">
                   enquiries@rapidry.in
                 </a>
-                <a href="https://wa.me/917070311787" target="_blank" rel="noreferrer" className="block font-body text-sm text-cream/70 hover:text-cream">
-                  WhatsApp
+                <a href="https://wa.me/917667625880" target="_blank" rel="noopener noreferrer" className="block font-body text-sm text-cream/70 hover:text-cream">
+                  WhatsApp (+91 7667625880)
                 </a>
                 <a href="https://instagram.com/rapidry" target="_blank" rel="noreferrer" className="block font-body text-sm text-cream/70 hover:text-cream">
                   Instagram

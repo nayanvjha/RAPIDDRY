@@ -163,6 +163,8 @@ export default function PriceCalculator() {
 
   const pickupEstimate = buildDateLabel(1);
   const savings = grandTotal > 200 ? Math.round(grandTotal * 0.15) : 0;
+  const whatsappMessage = `Hi RAPIDRY! I would like to book a laundry pickup. My estimated total is ${formatMoney(grandTotal)}.`;
+  const whatsappUrl = `https://wa.me/917667625880?text=${encodeURIComponent(whatsappMessage)}`;
 
   const itemQuantity = (serviceKey, itemName) => quantities[`${serviceKey}__${itemName}`] ?? 0;
 
@@ -178,6 +180,10 @@ export default function PriceCalculator() {
       }
       return { ...current, [key]: clampedQty };
     });
+  };
+
+  const handleBookOrder = () => {
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -273,6 +279,7 @@ export default function PriceCalculator() {
             <button
               ref={ctaRef}
               type="button"
+              onClick={handleBookOrder}
               className="mt-7 rounded-full bg-gold px-8 py-3 font-body text-sm font-semibold uppercase tracking-[0.08em] text-forest-dark opacity-0"
               style={{ transform: 'translateY(18px)' }}
             >
