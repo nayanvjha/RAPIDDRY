@@ -1,46 +1,235 @@
-import { useRef } from 'react';
-import { Gift, CheckCircle2 } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Gift, CheckCircle2, X } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import useHeaderReveal from '../../hooks/useHeaderReveal';
 
 const SECTORS = ['Sector 29', 'Sector 31', 'Sector 43', 'Sector 44', 'Sector 47', 'Sector 56', 'Sector 57', 'Sector 66'];
+const MODAL_STORAGE_KEY = 'rapidry_waitlist_modal_state_v1';
+const MIN_SUBMIT_DELAY_MS = 1500;
+const DEFAULT_FORM_ENDPOINT = 'https://formspree.io/f/xdaynpgv';
 
 export default function WaitlistOffer() {
+  const formEndpoint = import.meta.env.VITE_WAITLIST_FORM_ENDPOINT || DEFAULT_FORM_ENDPOINT;
   const emailjsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
   const emailjsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
   const emailjsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+  const endpointToken = import.meta.env.VITE_WAITLIST_FORM_BEARER_TOKEN;
+  const [isOpen, setIsOpen] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('idle');
+  const openedAtRef = useRef(0);
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful },
+    setError,
+    formState: { errors },
   } = useForm({
     defaultValues: {
       name: '',
       phone: '',
       sector: '',
+      company: '',
     },
   });
 
-  const onSubmit = (data) => {
-    console.log('waitlist-claim', {
-      data,
-      emailjsServiceId,
-      emailjsTemplateId,
-      emailjsPublicKey,
-    });
-    reset();
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const alreadyHandled = localStorage.getItem(MODAL_STORAGE_KEY);
+    if (alreadyHandled) {
+      return undefined;
+    }
+
+    const timer = window.setTimeout(() => {
+      openedAtRef.current = Date.now();
+      setIsOpen(true);
+    }, 3000);
+
+    const onMouseLeave = (event) => {
+      if (event.clientY <= 0) {
+        openedAtRef.current = Date.now();
+        setIsOpen(true);
+      }
+    };
+
+    document.addEventListener('mouseleave', onMouseLeave);
+
+    return () => {
+      window.clearTimeout(timer);
+      document.removeEventListener('mouseleave', onMouseLeave);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === 'undefined') {
+      return undefined;
+    }
+
+    if (!isOpen) {
+      return undefined;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen]);
+
+  const closeModal = () => {
+    setIsOpen(false);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(MODAL_STORAGE_KEY, 'dismissed');
+    }
   };
 
-  const sectionRef = useRef(null);
+  const submitViaEmailJs = async (data) => {
+    const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        service_id: emailjsServiceId,
+        template_id: emailjsTemplateId,
+        user_id: emailjsPublicKey,
+        template_params: {
+          name: data.name,
+          phone: data.phone,
+          sector: data.sector,
+          source: 'Website Waitlist Modal',
+        },
+      }),
+    });
 
-  useHeaderReveal(sectionRef);
+    if (!response.ok) {
+      throw new Error('EmailJS request failed');
+    }
+  };
+
+  const submitViaEndpoint = async (data) => {
+    if (!formEndpoint) {
+      throw new Error('Missing waitlist form endpoint');
+    }
+
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+
+    if (endpointToken) {
+      headers.Authorization = `Bearer ${endpointToken}`;
+    }
+
+    const response = await fetch(formEndpoint, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        name: data.name,
+        phone: data.phone,
+        sector: data.sector,
+        source: 'Website Waitlist Modal',
+        submitted_at: new Date().toISOString(),
+        page_url: typeof window === 'undefined' ? '' : window.location.href,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Form endpoint request failed: ${errorText}`);
+    }
+  };
+
+  const normalizeIndianMobile = (value) => {
+    const digits = String(value ?? '').replace(/\D/g, '');
+    if (digits.length === 12 && digits.startsWith('91')) {
+      return digits.slice(2);
+    }
+    if (digits.length === 11 && digits.startsWith('0')) {
+      return digits.slice(1);
+    }
+    return digits;
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      setSubmitStatus('submitting');
+
+      // Basic anti-bot guard.
+      if (data.company) {
+        setSubmitStatus('success');
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(MODAL_STORAGE_KEY, 'submitted');
+        }
+        return;
+      }
+
+      if (openedAtRef.current && Date.now() - openedAtRef.current < MIN_SUBMIT_DELAY_MS) {
+        setSubmitStatus('error');
+        return;
+      }
+
+      const normalizedPhone = normalizeIndianMobile(data.phone);
+      if (!/^[6-9][0-9]{9}$/.test(normalizedPhone)) {
+        setError('phone', {
+          type: 'validate',
+          message: 'Enter a valid Indian mobile number',
+        });
+        setSubmitStatus('idle');
+        return;
+      }
+
+      const payload = {
+        ...data,
+        phone: normalizedPhone,
+      };
+
+      if (formEndpoint) {
+        await submitViaEndpoint(payload);
+      } else if (emailjsServiceId && emailjsTemplateId && emailjsPublicKey) {
+        await submitViaEmailJs(payload);
+      } else {
+        throw new Error('No form service configured. Set VITE_WAITLIST_FORM_ENDPOINT or EmailJS variables.');
+      }
+
+      setSubmitStatus('success');
+      reset();
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(MODAL_STORAGE_KEY, 'submitted');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      console.error('waitlist-submit-failed', error);
+    }
+  };
+
+  if (!isOpen) {
+    return null;
+  }
 
   return (
-    <section id="waitlist" ref={sectionRef} className="bg-forest-dark py-[100px] text-cream">
-      <div className="mx-auto max-w-[680px] rounded-3xl border border-gold/35 bg-[rgba(243,239,230,0.06)] p-5 backdrop-blur-[16px] md:p-7 lg:p-10">
-        <div data-reveal="eyebrow" className="flex items-center justify-center gap-3 text-gold">
+    <div className="fixed inset-0 z-[1200] flex items-center justify-center px-4 py-8 text-cream">
+      <button
+        type="button"
+        aria-label="Close waitlist popup"
+        className="absolute inset-0 bg-[rgba(0,0,0,0.62)] backdrop-blur-[2px]"
+        onClick={closeModal}
+      />
+
+      <div className="relative z-10 w-full max-w-[680px] rounded-3xl border border-gold/35 bg-[rgba(15,46,42,0.96)] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-[16px] md:p-7 lg:p-10">
+        <button
+          type="button"
+          aria-label="Close"
+          className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/45 text-gold transition hover:bg-gold hover:text-forest-dark"
+          onClick={closeModal}
+        >
+          <X size={16} />
+        </button>
+
+        <div className="flex items-center justify-center gap-3 text-gold">
           <Gift size={20} />
           <span className="rounded-full border border-gold/40 px-3 py-1 font-body text-xs font-semibold uppercase tracking-[0.1em]">
             Early Member Offer
@@ -48,15 +237,32 @@ export default function WaitlistOffer() {
         </div>
 
         <h2 className="mx-auto mt-6 max-w-xl overflow-hidden text-center font-display text-3xl font-bold leading-tight text-cream md:text-4xl lg:text-[42px]">
-          <span data-reveal="title" className="block">
+          <span className="block">
             50% off on your first order.
           </span>
         </h2>
-        <p data-reveal="subtitle" className="mt-4 text-center font-body text-sm text-cream/70">
+        <p className="mt-4 text-center font-body text-sm text-cream/70">
           Exclusive discount for early members in Gurugram.
         </p>
 
+        {submitStatus === 'success' ? (
+          <div className="mt-8 rounded-2xl border border-emerald-400/45 bg-emerald-500/12 p-5 text-center">
+            <div className="flex items-center justify-center gap-2 text-emerald-300">
+              <CheckCircle2 size={18} />
+              <p className="font-body text-sm font-semibold">Thanks! We&apos;ve reserved your 50% off spot, we&apos;ll reach out shortly.</p>
+            </div>
+          </div>
+        ) : (
         <form className="mt-8 space-y-4" onSubmit={handleSubmit(onSubmit)}>
+          <input
+            type="text"
+            autoComplete="off"
+            tabIndex={-1}
+            className="hidden"
+            aria-hidden="true"
+            {...register('company')}
+          />
+
           <div>
             <input
               type="text"
@@ -75,8 +281,8 @@ export default function WaitlistOffer() {
               {...register('phone', {
                 required: 'Phone is required',
                 pattern: {
-                  value: /^[0-9]{10}$/,
-                  message: 'Enter a valid 10-digit phone number',
+                  value: /^[+]?([0-9\s()-]{10,16})$/,
+                  message: 'Enter a valid phone number',
                 },
               })}
             />
@@ -102,19 +308,23 @@ export default function WaitlistOffer() {
 
           <button
             type="submit"
+            disabled={submitStatus === 'submitting'}
             className="h-14 w-full rounded-full bg-gold font-body text-sm font-semibold uppercase tracking-[0.08em] text-forest-dark transition hover:brightness-95"
           >
-            Claim My Spot
+            {submitStatus === 'submitting' ? 'Submitting...' : 'Claim My Spot'}
           </button>
         </form>
 
-        {isSubmitSuccessful && (
-          <div className="mt-5 flex items-center justify-center gap-2 text-emerald-300">
-            <CheckCircle2 size={18} />
-            <p className="font-body text-sm font-medium">You're on the list!</p>
+        )}
+
+        {submitStatus === 'error' && (
+          <div className="mt-5 rounded-xl border border-red-300/45 bg-red-500/10 p-3 text-center">
+            <p className="font-body text-sm text-red-200">
+              Could not submit right now. Please try again in a moment.
+            </p>
           </div>
         )}
       </div>
-    </section>
+    </div>
   );
 }
