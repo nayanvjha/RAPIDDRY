@@ -31,8 +31,10 @@ export default function HomePage() {
       <Testimonials />
       <SectionDivider from="from-forest-dark" to="to-cream" />
       <AppDownload />
-      <FAQ />
+      <SectionDivider from="from-cream" to="to-forest-dark" />
       <WaitlistOffer />
+      <SectionDivider from="from-forest-dark" to="to-cream" />
+      <FAQ />
     </>
   );
 }
