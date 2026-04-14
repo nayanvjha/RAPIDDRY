@@ -58,16 +58,16 @@ function ServiceCard({ service, onRef }) {
   return (
     <article
       ref={onRef}
-      className="h-full"
+      className="h-full min-h-[340px]"
       style={{ perspective: '1000px' }}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
     >
       <div
         ref={cardRef}
-        className="relative h-full w-full overflow-hidden rounded-[20px] [transform-style:preserve-3d] transition-[transform] duration-150 ease-out"
+        className="relative h-full min-h-[340px] w-full overflow-hidden rounded-[20px] [transform-style:preserve-3d] transition-[transform] duration-150 ease-out"
       >
-        <div ref={borderRef} className="absolute inset-0 rounded-[20px] p-[1px]">
+        <div ref={borderRef} className="relative h-full rounded-[20px] p-[1px]">
           <div className="relative h-full w-full rounded-[19px] border border-[rgba(214,185,123,0.15)] bg-[rgba(24,63,58,0.95)] p-5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] sm:p-8">
             <div ref={glowRef} className="pointer-events-none absolute inset-0 rounded-[19px]" />
 
