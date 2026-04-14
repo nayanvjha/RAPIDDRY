@@ -62,7 +62,7 @@ function ServiceCard({ service, onRef }) {
   return (
     <article
       ref={onRef}
-      className="h-full w-full sm:w-[calc(50%-12px)] xl:w-[calc(33.333%-16px)]"
+      className="h-full"
       style={{ perspective: '1000px' }}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
@@ -116,48 +116,51 @@ function ServiceCard({ service, onRef }) {
 export default function Services() {
   const sectionRef = useRef(null);
   const cardRefs = useRef([]);
+  const hasAnimated = useRef(false);
 
   useHeaderReveal(sectionRef);
 
   useLayoutEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return undefined;
-    }
+    if (hasAnimated.current) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
 
-    const ctx = gsap.context(() => {
-      gsap.from(
-        cardRefs.current.filter(Boolean),
-        {
-          y: 60,
-          opacity: 0,
+    const cards = cardRefs.current.filter(Boolean);
+    if (cards.length === 0) return undefined;
+
+    gsap.set(cards, { y: 60, opacity: 0 });
+
+    ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: 'top 85%',
+      once: true,
+      onEnter: () => {
+        hasAnimated.current = true;
+        gsap.to(cards, {
+          y: 0,
+          opacity: 1,
           duration: 0.8,
           ease: 'power3.out',
           stagger: 0.1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-          },
-        },
-      );
-    }, sectionRef);
+        });
+      },
+    });
 
     const fallback = setTimeout(() => {
-      cardRefs.current.forEach((card) => {
-        if (card) {
+      cards.forEach((card) => {
+        if (card && getComputedStyle(card).opacity === '0') {
           card.style.opacity = '1';
           card.style.transform = 'translateY(0)';
         }
       });
-    }, 3000);
+    }, 4000);
 
     return () => {
-      ctx.revert();
       clearTimeout(fallback);
     };
   }, []);
 
   return (
-    <section id="services" ref={sectionRef} className="bg-cream py-[100px] text-forest-dark">
+    <section id="services" ref={sectionRef} className="bg-cream py-[60px] text-forest-dark sm:py-[80px] md:py-[100px]">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center">
           <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
@@ -173,7 +176,7 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-6">
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {SERVICES.map((service, index) => (
             <ServiceCard
               key={service.id}
