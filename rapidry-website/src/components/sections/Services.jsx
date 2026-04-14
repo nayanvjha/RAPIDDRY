@@ -62,7 +62,7 @@ function ServiceCard({ service, onRef, className = '' }) {
   return (
     <article
       ref={onRef}
-      className={`col-span-1 h-auto min-h-[300px] xl:col-span-2 ${className}`}
+      className={`col-span-1 h-full min-h-[300px] xl:col-span-2 ${className}`}
       style={{ perspective: '1000px' }}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
@@ -75,7 +75,7 @@ function ServiceCard({ service, onRef, className = '' }) {
           <div className="relative h-full w-full overflow-hidden rounded-[19px] border border-[rgba(214,185,123,0.15)] bg-[rgba(24,63,58,0.95)] p-5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] sm:p-8">
             <div ref={glowRef} className="pointer-events-none absolute inset-0 rounded-[19px]" />
 
-            <div className="relative z-10 flex h-full flex-col pb-2">
+            <div className="relative z-10 flex h-full flex-col">
               <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-gold/15 text-gold">
                 <Icon size={40} />
               </span>
@@ -101,7 +101,7 @@ function ServiceCard({ service, onRef, className = '' }) {
                 href={`https://wa.me/917070311787?text=Hi, I'd like to book ${service.name}`}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-6 w-full rounded-full bg-gold px-5 py-3 font-body text-sm font-semibold uppercase tracking-[0.08em] text-forest-dark transition-transform duration-200 hover:scale-[1.02] text-center inline-block"
+                className="mt-auto block w-full rounded-full bg-gold px-5 py-3 text-center font-body text-sm font-semibold uppercase tracking-[0.08em] text-forest-dark transition-transform duration-200 hover:scale-[1.02]"
               >
                 Book Now
               </a>
