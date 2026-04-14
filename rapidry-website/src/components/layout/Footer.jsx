@@ -1,5 +1,6 @@
 import { Instagram, Linkedin, Twitter, Heart } from 'lucide-react';
 import StartupIndiaBadge from '../StartupIndiaBadge';
+import { trackConversion } from '../../utils/gtag';
 
 const SERVICE_LINKS = ['Wash & Fold', 'Wash & Iron', 'Dry Clean', 'Steam Iron', 'Shoe Care', 'Bag Care'];
 const COMPANY_LINKS = [
@@ -56,7 +57,7 @@ export default function Footer() {
               <StartupIndiaBadge variant="inline" tone="light" className="mt-4" />
 
               <div className="mt-5 flex items-center gap-4 text-gold">
-                <a href="https://instagram.com/rapidry" target="_blank" rel="noreferrer" className="transition hover:opacity-70" aria-label="Instagram">
+                <a href="https://www.instagram.com/rapidry.in" target="_blank" rel="noreferrer" className="transition hover:opacity-70" aria-label="Instagram">
                   <Instagram size={20} />
                 </a>
                 <a href="https://linkedin.com/company/rapidry" target="_blank" rel="noreferrer" className="transition hover:opacity-70" aria-label="LinkedIn">
@@ -111,13 +112,13 @@ export default function Footer() {
             <div>
               <h3 className="font-body text-xs font-semibold uppercase tracking-[0.16em] text-cream">Connect</h3>
               <div className="mt-4 space-y-2">
-                <a href="mailto:enquiries@rapidry.in" className="block font-body text-sm text-gold hover:opacity-80">
+                <a href="mailto:enquiries@rapidry.in" onClick={() => trackConversion('contact')} className="block font-body text-sm text-gold hover:opacity-80">
                   enquiries@rapidry.in
                 </a>
-                <a href="https://wa.me/917667625880" target="_blank" rel="noopener noreferrer" className="block font-body text-sm text-cream/70 hover:text-cream">
+                <a href="https://wa.me/917667625880" target="_blank" rel="noopener noreferrer" onClick={() => trackConversion('contact')} className="block font-body text-sm text-cream/70 hover:text-cream">
                   WhatsApp (+91 7667625880)
                 </a>
-                <a href="https://instagram.com/rapidry" target="_blank" rel="noreferrer" className="block font-body text-sm text-cream/70 hover:text-cream">
+                <a href="https://www.instagram.com/rapidry.in" target="_blank" rel="noreferrer" className="block font-body text-sm text-cream/70 hover:text-cream">
                   Instagram
                 </a>
               </div>

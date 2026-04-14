@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import useMagnetic from '../../hooks/useMagnetic';
+import { trackConversion } from '../../utils/gtag';
 
 const NAV_LINKS = [
   { label: 'Services', id: 'services', type: 'section' },
@@ -176,6 +177,7 @@ export default function Navbar() {
               href="https://wa.me/917667625880"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackConversion('contact')}
               className="flex items-center gap-2 font-body text-sm text-white/90 hover:text-white"
             >
               <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
@@ -259,7 +261,10 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 text-left font-body text-lg text-gold"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={() => {
+              trackConversion('contact');
+              setIsMenuOpen(false);
+            }}
           >
             WhatsApp us
           </a>

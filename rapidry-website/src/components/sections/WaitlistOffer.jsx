@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Gift, CheckCircle2, X } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import { trackConversion } from '../../utils/gtag';
 
 const SECTORS = ['Sector 29', 'Sector 31', 'Sector 43', 'Sector 44', 'Sector 47', 'Sector 56', 'Sector 57', 'Sector 66'];
 const CLAIMED_STORAGE_KEY = 'rapidry_offer_claimed';
@@ -136,6 +137,7 @@ function OfferCard({ submitConfig, source, onClaimSuccess }) {
       }
 
       setSubmitStatus('success');
+      trackConversion('lead_form');
       reset();
       if (typeof window !== 'undefined') {
         localStorage.setItem(CLAIMED_STORAGE_KEY, 'true');

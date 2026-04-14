@@ -97,12 +97,14 @@ function ServiceCard({ service, onRef }) {
                 ))}
               </ul>
 
-              <button
-                type="button"
-                className="mt-auto w-full rounded-full bg-gold px-5 py-3 font-body text-sm font-semibold uppercase tracking-[0.08em] text-forest-dark transition-transform duration-200 hover:scale-[1.02]"
+              <a
+                href={`https://wa.me/917070311787?text=Hi, I'd like to book ${service.name}`}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-auto w-full rounded-full bg-gold px-5 py-3 font-body text-sm font-semibold uppercase tracking-[0.08em] text-forest-dark transition-transform duration-200 hover:scale-[1.02] text-center inline-block"
               >
                 Book Now
-              </button>
+              </a>
             </div>
           </div>
         </div>

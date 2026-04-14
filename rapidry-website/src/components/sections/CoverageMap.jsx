@@ -2,6 +2,7 @@ import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import useHeaderReveal from '../../hooks/useHeaderReveal';
+import { trackConversion } from '../../utils/gtag';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -133,6 +134,7 @@ export default function CoverageMap() {
       emailjsTemplateId,
       emailjsPublicKey,
     });
+    trackConversion('lead_form');
     setNotifyEmail('');
   };
 

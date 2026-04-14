@@ -137,11 +137,9 @@ export default function Hero() {
 
         <div ref={ctaRef} className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href="#download"
-            onClick={(event) => {
-              event.preventDefault();
-              smoothScrollTo('download');
-            }}
+            href="https://wa.me/917070311787?text=Hi, I'd like to place an order"
+            target="_blank"
+            rel="noreferrer"
             ref={primaryMagnetic.ref}
             onMouseMove={primaryMagnetic.handleMouseMove}
             onMouseLeave={primaryMagnetic.handleMouseLeave}
@@ -149,7 +147,7 @@ export default function Hero() {
             style={{ boxShadow: '0 8px 32px rgba(214,185,123,0.35)' }}
           >
             <Phone size={18} />
-            Download the App
+            Order Now
           </a>
 
           <button

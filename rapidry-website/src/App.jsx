@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import PageLoader from './components/ui/PageLoader';
@@ -8,12 +9,24 @@ import AboutPage from './pages/AboutPage';
 import BlogPage from './pages/BlogPage';
 import BlogPostPage from './pages/BlogPostPage';
 import { useLenis } from './hooks/useLenis';
+import { trackConversion } from './utils/gtag';
+
+function RouteConversionTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    trackConversion('page_view');
+  }, [location.pathname]);
+
+  return null;
+}
 
 export default function App() {
   useLenis();
 
   return (
     <BrowserRouter>
+      <RouteConversionTracker />
       <PageLoader />
       <ScrollProgress />
       <Navbar />
