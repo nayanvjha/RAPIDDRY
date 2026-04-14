@@ -127,34 +127,38 @@ export default function Services() {
     const cards = cardRefs.current.filter(Boolean);
     if (cards.length === 0) return undefined;
 
-    gsap.set(cards, { y: 60, opacity: 0 });
-
-    ScrollTrigger.create({
+    const trigger = ScrollTrigger.create({
       trigger: sectionRef.current,
       start: 'top 85%',
       once: true,
       onEnter: () => {
         hasAnimated.current = true;
-        gsap.to(cards, {
+        gsap.fromTo(
+          cards,
+          { y: 60, opacity: 0 },
+          {
           y: 0,
           opacity: 1,
           duration: 0.8,
           ease: 'power3.out',
           stagger: 0.1,
-        });
+            overwrite: 'auto',
+          },
+        );
       },
     });
 
     const fallback = setTimeout(() => {
       cards.forEach((card) => {
-        if (card && getComputedStyle(card).opacity === '0') {
+        if (card) {
           card.style.opacity = '1';
           card.style.transform = 'translateY(0)';
         }
       });
-    }, 4000);
+    }, 2000);
 
     return () => {
+      trigger.kill();
       clearTimeout(fallback);
     };
   }, []);
