@@ -3,7 +3,15 @@ import { Gift, CheckCircle2, X } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { trackConversion } from '../../utils/gtag';
 
-const SECTORS = ['Sector 29', 'Sector 31', 'Sector 43', 'Sector 44', 'Sector 47', 'Sector 56', 'Sector 57', 'Sector 66'];
+const SECTORS = [
+  'Sector 1', 'Sector 2', 'Sector 3', 'Sector 4', 'Sector 5',
+  'Sector 6', 'Sector 7', 'Sector 8', 'Sector 9', 'Sector 10',
+  'Sector 11', 'Sector 12', 'Sector 13', 'Sector 14', 'Sector 15',
+  'Sector 34', 'Sector 35', 'Sector 36', 'Sector 37', 'Sector 38',
+  'Sector 39', 'Sector 40', 'Sector 41', 'Sector 42', 'Sector 43',
+  'Sector 44', 'Sector 45', 'Sector 46', 'Sector 47', 'Sector 48',
+  'Sector 104', 'Sector 105',
+];
 const CLAIMED_STORAGE_KEY = 'rapidry_offer_claimed';
 const DISMISSED_STORAGE_KEY = 'rapidry_popup_dismissed';
 const MIN_SUBMIT_DELAY_MS = 1500;

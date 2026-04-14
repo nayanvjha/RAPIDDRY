@@ -6,9 +6,9 @@ import StartupIndiaBadge from '../StartupIndiaBadge';
 const STATS = [
   {
     key: 'market',
-    label: 'Indian laundry market',
-    target: 70000,
-    format: (value) => `₹${Math.round(value).toLocaleString('en-IN')} Cr`,
+    label: 'Indian Laundry Market',
+    target: 350000,
+    format: (value) => `₹${(Math.round(value) / 100000).toFixed(1)} Lakh Cr`,
   },
   {
     key: 'unorganised',
