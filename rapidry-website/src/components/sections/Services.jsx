@@ -125,25 +125,35 @@ export default function Services() {
     }
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        cardRefs.current,
-        { y: 100, opacity: 0, rotateX: 15 },
+      gsap.from(
+        cardRefs.current.filter(Boolean),
         {
-          y: 0,
-          rotateX: 0,
-          opacity: 1,
-          duration: 1,
+          y: 60,
+          opacity: 0,
+          duration: 0.8,
           ease: 'power3.out',
           stagger: 0.1,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 72%',
+            start: 'top 80%',
           },
-        }
+        },
       );
     }, sectionRef);
 
-    return () => ctx.revert();
+    const fallback = setTimeout(() => {
+      cardRefs.current.forEach((card) => {
+        if (card) {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }
+      });
+    }, 3000);
+
+    return () => {
+      ctx.revert();
+      clearTimeout(fallback);
+    };
   }, []);
 
   return (
