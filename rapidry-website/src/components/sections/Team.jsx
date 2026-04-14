@@ -88,12 +88,12 @@ export default function Team() {
 
   return (
     <section id="team" ref={sectionRef} className="bg-forest-dark py-[100px] text-cream">
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center">
           <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
             THE TEAM
           </p>
-          <h2 className="mt-4 overflow-hidden font-display text-3xl font-bold leading-tight text-cream md:text-4xl lg:text-5xl">
+          <h2 className="mt-4 overflow-hidden font-display text-2xl font-bold leading-tight text-cream sm:text-3xl md:text-4xl lg:text-5xl">
             <span data-reveal="title" className="block">
               The people behind RAPIDRY.
             </span>
@@ -103,7 +103,7 @@ export default function Team() {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {TEAM_MEMBERS.map((member, index) => {
             const isOpenRole = member.id === 'open-role';
             return (
@@ -115,7 +115,7 @@ export default function Team() {
                 className="group relative flex h-full flex-col overflow-hidden rounded-[24px] border-t-2 border-gold/20 bg-forest-mid p-9 text-center transition duration-300 hover:-translate-y-1.5 hover:border-gold/55"
               >
                 <span className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-gold/25 to-transparent opacity-0 transition duration-700 group-hover:translate-x-[240%] group-hover:opacity-100" />
-                <div className="relative mx-auto inline-flex h-[100px] w-[100px] items-center justify-center rounded-full border-[2.5px] border-gold text-gold md:h-[140px] md:w-[140px]">
+                <div className="relative mx-auto inline-flex h-[90px] w-[90px] items-center justify-center rounded-full border-[2.5px] border-gold text-gold sm:h-[120px] sm:w-[120px] md:h-[140px] md:w-[140px]">
                   <span className="pointer-events-none absolute -inset-3 rounded-full border border-gold/20 opacity-60 animate-[pulse_4s_ease-in-out_infinite]" />
                   {isOpenRole ? (
                     <Plus size={32} className="animate-[spin_8s_linear_infinite] transition group-hover:animate-[spin_2.5s_linear_infinite] md:h-[42px] md:w-[42px]" />
@@ -165,7 +165,7 @@ export default function Team() {
           })}
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
+        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-3">
           {VALUES.map((value) => {
             const Icon = value.Icon;
             return (
@@ -178,7 +178,7 @@ export default function Team() {
           })}
         </div>
 
-        <div className="relative mx-auto mt-12 max-w-[680px] rounded-2xl border border-gold/20 bg-[rgba(24,63,58,0.8)] p-5 text-center md:p-8">
+        <div className="relative mx-auto mt-12 max-w-[680px] rounded-2xl border border-gold/20 bg-[rgba(24,63,58,0.8)] p-4 text-center sm:p-6 md:p-8">
           <span className="pointer-events-none absolute left-5 top-1 font-display text-7xl text-gold/20">“</span>
           <p className="font-display text-[16px] italic leading-relaxed text-cream/90 md:text-[19px]">
             RAPIDRY began with two frustrations: broken trust and inconsistent care. We built this company so that every pickup

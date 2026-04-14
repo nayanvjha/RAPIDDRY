@@ -66,7 +66,7 @@ export default function BlogPostPage() {
 
   if (!post) {
     return (
-      <section className="bg-cream px-6 py-[120px] text-forest-dark">
+      <section className="bg-cream px-4 py-[120px] text-forest-dark sm:px-6">
         <div className="mx-auto max-w-3xl rounded-3xl border border-gold/25 bg-white/70 p-10 text-center shadow-[0_12px_40px_rgba(15,46,42,0.08)] backdrop-blur-sm">
           <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-gold">Blog</p>
           <h1 className="mt-4 font-display text-4xl font-bold leading-tight">Post not found</h1>
@@ -90,7 +90,7 @@ export default function BlogPostPage() {
   const renderedHtml = getRenderableHtml(post.content);
 
   return (
-    <section className="bg-cream px-6 py-[100px] text-forest-dark">
+    <section className="bg-cream px-4 py-[100px] text-forest-dark sm:px-6">
       <div className="mx-auto max-w-4xl">
         <Link
           to="/blog"

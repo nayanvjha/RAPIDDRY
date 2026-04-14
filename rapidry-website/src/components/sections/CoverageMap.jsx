@@ -140,7 +140,7 @@ export default function CoverageMap() {
 
   return (
     <section id="coverage" ref={sectionRef} className="bg-cream py-[100px] text-forest-dark">
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center">
           <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
             LAUNCHING SOON
@@ -156,22 +156,10 @@ export default function CoverageMap() {
         </div>
 
         <div className="mx-auto mt-12 max-w-3xl">
-          <div className="rounded-2xl bg-forest-dark p-4 md:hidden">
-            <ul className="grid grid-cols-1 gap-2">
-              {sectors.map((sector) => (
-                <li
-                  key={`mobile-${sector.id}`}
-                  className="flex items-center justify-between rounded-full border border-cream/10 bg-[rgba(15,46,42,0.85)] px-3 py-2"
-                >
-                  <span className="font-body text-xs font-semibold text-cream/75">{sector.label}</span>
-                  <span className="font-body text-[10px] uppercase tracking-[0.06em] text-gold/85">Coming Soon</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div ref={mapFrameRef} className="relative hidden rounded-3xl bg-forest-dark p-12 md:block">
-            <div className="grid grid-cols-6 gap-4">
+          <p className="mb-3 text-center font-body text-xs text-forest-dark/65 md:hidden">&larr; Scroll to explore &rarr;</p>
+          <div ref={mapFrameRef} className="relative overflow-x-auto rounded-3xl bg-forest-dark p-4 sm:p-8 md:p-12">
+            <div className="mx-auto min-w-[420px] md:min-w-0">
+              <div className="grid grid-cols-6 gap-2 sm:gap-3 md:gap-4">
               {sectors.map((sector, index) => (
                 <div
                   key={sector.id}
@@ -180,9 +168,9 @@ export default function CoverageMap() {
                   }}
                   data-cx={sector.col - 2.5}
                   data-cy={sector.row - 2}
-                  className={`relative flex h-[86px] w-[86px] flex-col items-center justify-center text-center transition duration-200 ${
+                  className={`relative flex h-[56px] w-[56px] flex-col items-center justify-center text-center transition duration-200 sm:h-[70px] sm:w-[70px] md:h-[86px] md:w-[86px] ${
                     sector.covered ? 'cursor-pointer' : 'cursor-pointer'
-                  } ${sector.row % 2 === 1 ? 'translate-x-6' : ''}`}
+                  } ${sector.row % 2 === 1 ? 'translate-x-3 sm:translate-x-5 md:translate-x-6' : ''}`}
                   style={{ clipPath: hexClip }}
                   onMouseEnter={(event) => handleEnter(event, sector)}
                   onMouseMove={(event) => handleMove(event, sector)}
@@ -207,11 +195,11 @@ export default function CoverageMap() {
                   )}
 
                   <div className="relative z-10">
-                    <div className={`font-body text-[11px] font-bold ${sector.covered ? 'text-cream/60' : 'text-cream/20'}`}>
+                    <div className={`font-body text-[8px] font-bold sm:text-[10px] md:text-[11px] ${sector.covered ? 'text-cream/60' : 'text-cream/20'}`}>
                       {sector.label}
                     </div>
                     <div
-                      className={`font-body text-[10px] ${
+                      className={`font-body text-[8px] sm:text-[9px] md:text-[10px] ${
                         sector.covered
                           ? 'text-emerald-300/90'
                           : tooltip?.sector.id === sector.id
@@ -224,6 +212,7 @@ export default function CoverageMap() {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
 
             {HOTSPOT_TARGETS.map((label, index) => {
@@ -272,7 +261,7 @@ export default function CoverageMap() {
             <button
               key={zone}
               type="button"
-              className="rounded-full border border-gold/50 px-3 py-1.5 font-body text-xs text-forest-dark transition hover:bg-gold hover:text-forest-dark md:px-4 md:py-2 md:text-sm"
+              className="rounded-full border border-gold/50 px-2.5 py-1.5 font-body text-xs text-forest-dark transition hover:bg-gold hover:text-forest-dark sm:px-4 sm:py-2 sm:text-sm"
             >
               {zone}
             </button>

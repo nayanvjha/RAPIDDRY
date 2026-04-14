@@ -138,14 +138,14 @@ export default function Navbar() {
           borderBottom: isScrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
         }}
       >
-        <div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-4 md:px-6">
+        <div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-4 sm:px-6">
           <button
-            className="flex items-center gap-2"
+            className="flex items-center gap-1.5 sm:gap-2"
             onClick={handleBrandClick}
             aria-label="Go to top"
           >
             <img src="/IMG_new.png" alt="RAPIDRY logo" className="h-9 w-9 object-contain md:h-11 md:w-11" />
-            <span className="font-display text-[20px] font-bold tracking-[1.5px] text-white md:text-[24px] md:tracking-[2px]">RAPIDRY</span>
+            <span className="font-display text-[15px] font-bold tracking-[1.1px] text-white sm:text-[18px] md:text-[24px] md:tracking-[2px]">RAPIDRY</span>
           </button>
 
           <div className="hidden items-center gap-7 lg:flex">
@@ -198,7 +198,7 @@ export default function Navbar() {
 
           <button
             aria-label="Toggle menu"
-            className="relative h-10 w-10 lg:hidden"
+            className="relative h-11 w-11 lg:hidden"
             onClick={() => setIsMenuOpen((value) => !value)}
           >
             <span
@@ -219,11 +219,11 @@ export default function Navbar() {
 
       <div
         ref={menuRef}
-        className="fixed inset-0 hidden flex-col bg-forest-dark px-8 pt-24"
+        className="fixed inset-0 z-[999] hidden min-h-screen flex-col bg-forest-dark px-6 pt-24"
         style={{ zIndex: 999 }}
       >
         <button
-          className="absolute right-6 top-6 text-4xl leading-none text-cream"
+          className="absolute right-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream/25 text-4xl leading-none text-cream"
           aria-label="Close menu"
           onClick={() => setIsMenuOpen(false)}
         >
@@ -237,7 +237,7 @@ export default function Navbar() {
                 key={`mobile-${link.to}`}
                 to={link.to}
                 ref={registerMenuLinkRef}
-                className="text-left font-display text-[36px] leading-none text-cream"
+                className="text-left font-display text-[30px] leading-none text-cream sm:text-[36px]"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}
@@ -246,7 +246,7 @@ export default function Navbar() {
               <button
                 key={`mobile-${link.id}`}
                 ref={registerMenuLinkRef}
-                className="text-left font-display text-[36px] leading-none text-cream"
+                className="text-left font-display text-[30px] leading-none text-cream sm:text-[36px]"
                 onClick={() => {
                   scrollToId(link.id);
                   setIsMenuOpen(false);

@@ -97,7 +97,7 @@ function StoreButton({ icon, prefix, title }) {
   return (
     <button
       type="button"
-      className="flex min-w-[210px] items-center gap-3 rounded-2xl border border-transparent bg-forest-dark px-4 py-3 text-left transition hover:border-[1.5px] hover:border-gold hover:bg-forest-mid"
+      className="flex w-full min-w-0 items-center gap-3 rounded-2xl border border-transparent bg-forest-dark px-4 py-3 text-left transition hover:border-[1.5px] hover:border-gold hover:bg-forest-mid sm:w-auto sm:min-w-[210px]"
     >
       {icon}
       <span>
@@ -141,8 +141,8 @@ export default function AppDownload() {
   }, []);
 
   return (
-    <section id="download" ref={sectionRef} className="bg-cream py-[120px] text-forest-dark">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 md:px-6 lg:grid-cols-12 lg:gap-8">
+    <section id="download" ref={sectionRef} className="bg-cream py-[60px] text-forest-dark sm:py-[80px] lg:py-[120px]">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-8">
         <div className="order-2 lg:order-1 lg:col-span-5">
           <div className="hidden md:block">
             <PhoneMockupBoundary>
@@ -157,7 +157,7 @@ export default function AppDownload() {
         </div>
 
         <div className="order-1 lg:order-2 lg:col-span-7">
-          <h2 className="mt-5 overflow-hidden font-display text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
+          <h2 className="mt-5 overflow-hidden font-display text-2xl font-bold leading-tight sm:text-3xl md:text-4xl lg:text-5xl">
             <span data-reveal="title" className="block">
               Your laundry,<br />
               <span className="italic">professionally managed.</span>

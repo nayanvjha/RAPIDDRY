@@ -12,10 +12,10 @@ function formatDate(dateString) {
 export default function BlogPage() {
   return (
     <section className="bg-cream py-[110px] text-forest-dark">
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center">
           <p className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">BLOG</p>
-          <h1 className="mt-4 font-display text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
+          <h1 className="mt-4 font-display text-2xl font-bold leading-tight sm:text-3xl md:text-4xl lg:text-5xl">
             Insights &amp; care tips from RAPIDRY
           </h1>
           <p className="mx-auto mt-5 max-w-3xl font-body text-base text-forest-dark/72">
@@ -24,11 +24,11 @@ export default function BlogPage() {
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {BLOG_POSTS.map((post) => (
             <article
               key={post.id}
-              className="flex h-full flex-col rounded-3xl border border-gold/30 bg-forest-dark/95 p-5 text-cream shadow-[0_14px_40px_rgba(15,46,42,0.28)] backdrop-blur-sm md:p-7"
+              className="flex h-full flex-col rounded-3xl border border-gold/30 bg-forest-dark/95 p-4 text-cream shadow-[0_14px_40px_rgba(15,46,42,0.28)] backdrop-blur-sm sm:p-6"
             >
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-xs text-cream/70">
                 <span>{formatDate(post.date)}</span>

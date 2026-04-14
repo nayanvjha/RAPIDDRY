@@ -188,12 +188,12 @@ export default function PriceCalculator() {
 
   return (
     <section id="calculator" ref={sectionRef} className="bg-forest-dark py-[100px] text-cream">
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-3xl text-center">
           <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
             INSTANT ESTIMATE
           </p>
-          <h2 className="mt-4 overflow-hidden font-display text-4xl font-bold leading-tight text-cream md:text-5xl">
+          <h2 className="mt-4 overflow-hidden font-display text-2xl font-bold leading-tight text-cream sm:text-3xl md:text-4xl lg:text-5xl">
             <span data-reveal="title" className="block">
               What will your order cost?
             </span>
@@ -203,8 +203,8 @@ export default function PriceCalculator() {
           </p>
         </div>
 
-        <div className="mx-auto mt-12 max-w-[720px] rounded-3xl border border-gold/15 bg-[rgba(243,239,230,0.06)] p-4 backdrop-blur-[20px] md:p-6 lg:p-10">
-          <div className="-mx-2 flex gap-2 overflow-x-auto px-2 pb-2 [scrollbar-width:none]" style={{ WebkitOverflowScrolling: 'touch' }}>
+        <div className="mx-auto mt-12 max-w-[720px] rounded-3xl border border-gold/15 bg-[rgba(243,239,230,0.06)] p-4 backdrop-blur-[20px] sm:p-6 md:p-10">
+          <div className="-mx-2 flex gap-2 overflow-x-auto px-2 pb-2 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
             {SERVICE_CONFIG.map((service) => {
               const isActive = service.key === activeService;
               return (
@@ -212,7 +212,7 @@ export default function PriceCalculator() {
                   key={service.key}
                   type="button"
                   onClick={() => setActiveService(service.key)}
-                  className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                  className={`flex-shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 ${
                     isActive
                       ? 'border-gold bg-gold text-forest-dark'
                       : 'border-gold/30 bg-transparent text-cream/70 hover:border-gold/60 hover:text-cream'
@@ -264,7 +264,7 @@ export default function PriceCalculator() {
 
           <div className="mt-10 border-t border-gold/20 pt-8 text-center">
             <p className="font-body text-sm uppercase tracking-[0.16em] text-cream/70">Estimated total</p>
-            <p className="mt-2 font-display text-4xl font-bold leading-none text-gold md:text-5xl lg:text-6xl">{formatMoney(displayTotal)}</p>
+            <p className="mt-2 font-display text-3xl font-bold leading-none text-gold sm:text-4xl md:text-5xl lg:text-6xl">{formatMoney(displayTotal)}</p>
 
             <p className="mt-4 font-body text-sm text-cream/70">
               Pickup by {pickupEstimate} • Delivered in 4 hrs

@@ -61,12 +61,12 @@ export default function HowItWorks() {
 
   return (
     <section id="how-it-works" ref={sectionRef} className="bg-cream py-[110px] text-forest-dark">
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center">
           <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
             HOW IT WORKS
           </p>
-          <h2 className="mt-4 overflow-hidden font-display text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
+          <h2 className="mt-4 overflow-hidden font-display text-2xl font-bold leading-tight sm:text-3xl md:text-4xl lg:text-5xl">
             <span data-reveal="title" className="block">
               Fresh clothes in <span className="italic">3 simple steps.</span>
             </span>
@@ -83,7 +83,7 @@ export default function HowItWorks() {
               ref={(node) => {
                 cardRefs.current[index] = node;
               }}
-              className="rounded-3xl border border-cream-dark bg-white p-7 shadow-[0_12px_30px_rgba(15,46,42,0.08)]"
+              className="rounded-3xl border border-cream-dark bg-white p-5 shadow-[0_12px_30px_rgba(15,46,42,0.08)] sm:p-7"
             >
               <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gold/15 text-gold">
                 <step.Icon size={26} />

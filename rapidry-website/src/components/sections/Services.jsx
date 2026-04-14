@@ -62,7 +62,7 @@ function ServiceCard({ service, onRef }) {
   return (
     <article
       ref={onRef}
-      className="h-auto min-h-[320px] md:h-[340px]"
+      className="h-auto min-h-[300px]"
       style={{ perspective: '1000px' }}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
@@ -72,7 +72,7 @@ function ServiceCard({ service, onRef }) {
         className="relative h-full w-full rounded-[20px] [transform-style:preserve-3d] transition-[transform] duration-150 ease-out"
       >
         <div ref={borderRef} className="absolute inset-0 rounded-[20px] p-[1px]">
-          <div className="relative h-full w-full rounded-[19px] border border-[rgba(214,185,123,0.15)] bg-[rgba(24,63,58,0.95)] p-8 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+          <div className="relative h-full w-full rounded-[19px] border border-[rgba(214,185,123,0.15)] bg-[rgba(24,63,58,0.95)] p-5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] sm:p-8">
             <div ref={glowRef} className="pointer-events-none absolute inset-0 rounded-[19px]" />
 
             <div className="relative z-10 flex h-full flex-col">
@@ -80,7 +80,7 @@ function ServiceCard({ service, onRef }) {
                 <Icon size={40} />
               </span>
 
-              <h3 className="mt-6 font-display text-[22px] font-semibold text-white">{service.name}</h3>
+              <h3 className="mt-6 font-display text-[18px] font-semibold text-white sm:text-[22px]">{service.name}</h3>
               {service.timing && (
                 <span className="mt-1 inline-flex items-center gap-1.5 font-body text-[13px] font-medium text-gold/90">
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold/70" />
@@ -148,7 +148,7 @@ export default function Services() {
 
   return (
     <section id="services" ref={sectionRef} className="bg-cream py-[100px] text-forest-dark">
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center">
           <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
             OUR SERVICES
@@ -163,7 +163,7 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {SERVICES.map((service, index) => (
             <ServiceCard
               key={service.id}

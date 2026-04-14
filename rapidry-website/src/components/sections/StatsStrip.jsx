@@ -102,14 +102,14 @@ export default function StatsStrip() {
       ref={sectionRef}
       className="w-full border-b border-t border-[#EAE4D8] bg-cream py-8"
     >
-      <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
-        <div className="grid w-full grid-cols-2 gap-y-6 md:flex md:flex-wrap md:items-center md:justify-between md:gap-4">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+        <div className="grid w-full grid-cols-2 gap-4 md:flex md:items-center md:justify-between md:gap-4">
           {STATS.map((stat, index) => (
-            <div key={stat.key} className="flex min-w-[150px] flex-1 items-center justify-center gap-3">
+            <div key={stat.key} className="flex min-w-0 flex-1 items-center justify-center gap-3 text-center">
               <div className="text-center">
                 <div
                   ref={registerValueRef}
-                  className="font-display text-[24px] font-bold leading-none text-forest-dark md:text-[40px]"
+                  className="font-display text-[22px] font-bold leading-none text-forest-dark sm:text-[28px] md:text-[40px]"
                 >
                   {stat.format(0)}
                 </div>
@@ -122,7 +122,7 @@ export default function StatsStrip() {
         </div>
 
         <div className="mt-7 flex justify-center">
-          <StartupIndiaBadge variant="inline" tone="dark" />
+          <StartupIndiaBadge variant="inline" tone="dark" className="max-w-[90vw] scale-90 sm:scale-100" />
         </div>
       </div>
     </section>

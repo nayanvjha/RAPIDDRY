@@ -25,9 +25,9 @@ function scrollToId(id) {
 export default function Footer() {
   return (
     <footer>
-      <section className="bg-gold px-4 py-[60px] text-center text-forest-dark md:px-6">
+      <section className="bg-gold px-4 py-[60px] text-center text-forest-dark sm:px-6">
         <div className="mx-auto max-w-3xl">
-          <h2 className="font-display text-2xl font-bold md:text-3xl lg:text-[36px]">Ready for premium laundry care?</h2>
+          <h2 className="font-display text-2xl font-bold sm:text-3xl md:text-[36px]">Ready for premium laundry care?</h2>
           <p className="mx-auto mt-4 max-w-xl font-body text-base text-forest-dark/70">
             Download the app and schedule your first pickup in under 60 seconds.
           </p>
@@ -42,8 +42,8 @@ export default function Footer() {
       </section>
 
       <section className="bg-forest-dark pb-10 pt-12 text-cream md:pt-16">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-4">
             <div>
               <div className="flex items-center gap-2 text-gold">
                 <img src="/IMG_new.png" alt="RAPIDRY logo" className="h-7 w-7 object-contain" />
@@ -54,7 +54,7 @@ export default function Footer() {
                 Redefining garment care for the modern professional.
               </p>
 
-              <StartupIndiaBadge variant="inline" tone="light" className="mt-4" />
+              <StartupIndiaBadge variant="inline" tone="light" className="mt-4 max-w-[90vw] scale-90 sm:scale-100" />
 
               <div className="mt-5 flex items-center gap-4 text-gold">
                 <a href="https://www.instagram.com/rapidry.in" target="_blank" rel="noreferrer" className="transition hover:opacity-70" aria-label="Instagram">

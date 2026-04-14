@@ -158,7 +158,7 @@ function OfferCard({ submitConfig, source, onClaimSuccess }) {
   };
 
   return (
-    <div className="w-full rounded-3xl border border-gold/35 bg-[rgba(15,46,42,0.96)] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-[16px] md:p-7 lg:p-10">
+    <div className="w-full rounded-3xl border border-gold/35 bg-[rgba(15,46,42,0.96)] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-[16px] sm:p-7 md:p-10">
       <div className="flex items-center justify-center gap-3 text-gold">
         <Gift size={20} />
         <span className="rounded-full border border-gold/40 px-3 py-1 font-body text-xs font-semibold uppercase tracking-[0.1em]">
@@ -166,7 +166,7 @@ function OfferCard({ submitConfig, source, onClaimSuccess }) {
         </span>
       </div>
 
-      <h2 className="mx-auto mt-6 max-w-xl overflow-hidden text-center font-display text-3xl font-bold leading-tight text-cream md:text-4xl lg:text-[42px]">
+      <h2 className="mx-auto mt-6 max-w-xl overflow-hidden text-center font-display text-2xl font-bold leading-tight text-cream sm:text-3xl md:text-4xl lg:text-[42px]">
         <span className="block">
           50% off on your first order.
         </span>
@@ -338,7 +338,7 @@ export default function WaitlistOffer() {
   return (
     <>
       <section id="waitlist" className="bg-forest-dark py-[100px] text-cream">
-        <div className="mx-auto max-w-[680px] px-4 md:px-6">
+        <div className="mx-auto max-w-[680px] px-4 sm:px-6">
           <OfferCard submitConfig={submitConfig} source="Website Waitlist Section" onClaimSuccess={handleClaimSuccess} />
         </div>
       </section>

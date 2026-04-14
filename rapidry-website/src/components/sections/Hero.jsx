@@ -105,17 +105,17 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.15)_0%,rgba(0,0,0,0.1)_40%,rgba(0,0,0,0.5)_80%,rgba(0,0,0,0.7)_100%)]" />
       </div>
 
-      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center md:px-6">
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center sm:px-6">
         <div
           ref={eyebrowRef}
-          className="mb-6 inline-flex w-fit items-center rounded-full border border-white/20 bg-[rgba(0,0,0,0.3)] px-4 py-2 font-body text-[12px] font-medium text-white backdrop-blur-md"
+          className="mb-6 inline-flex w-fit items-center rounded-full border border-white/20 bg-[rgba(0,0,0,0.3)] px-3 py-2 font-body text-[10px] font-medium text-white backdrop-blur-md sm:px-4 sm:text-[12px]"
         >
           ✦&nbsp;&nbsp;Gurgaon&apos;s Premium Laundry Service
         </div>
 
         <h1
           ref={headlineRef}
-          className="font-display text-[clamp(28px,7vw,76px)] font-bold leading-[1.05] text-white"
+          className="font-display text-[28px] font-bold leading-[1.05] text-white sm:text-[36px] md:text-[clamp(44px,5.5vw,76px)]"
           style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}
         >
           Your wardrobe, <span className="italic">professionally</span> cared for<span className="text-gold">.</span>
@@ -123,13 +123,13 @@ export default function Hero() {
 
         <p
           ref={subtitleRef}
-          className="mt-6 max-w-sm font-body text-[14px] leading-[1.8] text-white/85 md:max-w-xl md:text-[16px]"
+          className="mt-6 max-w-xs font-body text-[13px] leading-[1.8] text-white/85 sm:max-w-md sm:text-[14px] md:max-w-xl md:text-[16px]"
           style={{ textShadow: '0 1px 10px rgba(0,0,0,0.4)' }}
         >
           Ironed clothes in 40 minutes. From pickup to delivery, cleaned clothes at your door in as fast as 3 hours. Real-time tracking. Zero accountability issues. Premium care for every garment.
         </p>
 
-        <div className="mt-5 max-w-3xl rounded-2xl border border-gold/55 bg-[rgba(15,46,42,0.78)] px-4 py-3 shadow-[0_10px_30px_rgba(214,185,123,0.22)] backdrop-blur-md md:px-6">
+        <div className="mt-5 max-w-3xl rounded-2xl border border-gold/55 bg-[rgba(15,46,42,0.78)] px-4 py-3 shadow-[0_10px_30px_rgba(214,185,123,0.22)] backdrop-blur-md sm:px-6">
           <p className="font-body text-[13px] font-semibold leading-relaxed text-gold md:text-[15px]">
             India&apos;s first laundry to offer full refund of your clothes (clothe billed amount) if it gets damaged while servicing.
           </p>
@@ -143,7 +143,7 @@ export default function Hero() {
             ref={primaryMagnetic.ref}
             onMouseMove={primaryMagnetic.handleMouseMove}
             onMouseLeave={primaryMagnetic.handleMouseLeave}
-            className="inline-flex h-14 items-center gap-2 rounded-full bg-gold px-7 font-body text-[15px] font-semibold text-forest-dark transition-transform duration-200"
+            className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-gold px-7 font-body text-[15px] font-semibold text-forest-dark transition-transform duration-200 sm:w-auto"
             style={{ boxShadow: '0 8px 32px rgba(214,185,123,0.35)' }}
           >
             <Phone size={18} />
@@ -154,16 +154,16 @@ export default function Hero() {
             ref={secondaryMagnetic.ref}
             onMouseMove={secondaryMagnetic.handleMouseMove}
             onMouseLeave={secondaryMagnetic.handleMouseLeave}
-            className="inline-flex h-14 items-center gap-2 rounded-full border-[1.5px] border-white/40 px-7 font-body text-[15px] font-medium text-white transition-colors hover:bg-white/10"
+            className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full border-[1.5px] border-white/40 px-7 font-body text-[15px] font-medium text-white transition-colors hover:bg-white/10 sm:w-auto"
             onClick={() => smoothScrollTo('how-it-works')}
           >
             How It Works <ArrowDown size={16} />
           </button>
         </div>
 
-        <div ref={statsRef} className="mt-9 flex items-center justify-center gap-4 font-body text-white md:gap-8">
+        <div ref={statsRef} className="mt-9 flex flex-col items-center justify-center gap-3 font-body text-white sm:flex-row sm:gap-6">
           <div className="text-center">
-            <div className="font-display text-[22px] font-bold text-white md:text-[28px]">3 hrs</div>
+            <div className="font-display text-[22px] font-bold text-white sm:text-[28px]">3 hrs</div>
             <div className="text-[12px] text-white/60">Express Delivery</div>
           </div>
         </div>
@@ -171,7 +171,7 @@ export default function Hero() {
 
       <div
         ref={scrollHintRef}
-        className="pointer-events-none absolute bottom-4 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center opacity-0 md:flex"
+        className="pointer-events-none absolute bottom-4 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center opacity-0 sm:flex"
       >
         <p className="font-body text-[11px] uppercase tracking-[3px] text-white/60">scroll to discover</p>
       </div>
