@@ -1,11 +1,7 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { Briefcase, Flame, Footprints, LayoutGrid, ShieldCheck, Shirt, Sparkles } from 'lucide-react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SERVICES } from '../../data/brand';
 import useHeaderReveal from '../../hooks/useHeaderReveal';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const ICON_MAP = {
   Shirt,
@@ -116,57 +112,8 @@ function ServiceCard({ service, onRef }) {
 export default function Services() {
   const sectionRef = useRef(null);
   const cardRefs = useRef([]);
-  const hasAnimated = useRef(false);
 
   useHeaderReveal(sectionRef);
-
-  useLayoutEffect(() => {
-    if (hasAnimated.current) return undefined;
-
-    const cards = cardRefs.current.filter(Boolean);
-    if (cards.length === 0) return undefined;
-
-    // Always force a visible baseline so cards can never stay hidden.
-    cards.forEach((card) => {
-      card.style.opacity = '1';
-      card.style.transform = 'translateY(0)';
-    });
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
-
-    const trigger = ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: 'top 85%',
-      once: true,
-      onEnter: () => {
-        hasAnimated.current = true;
-        gsap.from(
-          cards,
-          {
-            y: 40,
-            duration: 0.8,
-            ease: 'power3.out',
-            stagger: 0.1,
-            overwrite: 'auto',
-          },
-        );
-      },
-    });
-
-    const fallback = setTimeout(() => {
-      cards.forEach((card) => {
-        if (card) {
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
-        }
-      });
-    }, 2000);
-
-    return () => {
-      trigger.kill();
-      clearTimeout(fallback);
-    };
-  }, []);
 
   return (
     <section id="services" ref={sectionRef} className="bg-cream py-[60px] text-forest-dark sm:py-[80px] md:py-[100px]">

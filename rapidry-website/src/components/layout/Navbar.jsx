@@ -6,7 +6,7 @@ import useMagnetic from '../../hooks/useMagnetic';
 import { trackConversion } from '../../utils/gtag';
 
 const NAV_LINKS = [
-  { label: 'Services', id: 'services', type: 'section' },
+  { label: 'Services', to: '/services', type: 'page' },
   { label: 'How It Works', id: 'how-it-works', type: 'section' },
   { label: 'Coverage', id: 'coverage', type: 'section' },
   { label: 'Reviews', id: 'reviews', type: 'section' },
