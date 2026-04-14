@@ -122,10 +122,17 @@ export default function Services() {
 
   useLayoutEffect(() => {
     if (hasAnimated.current) return undefined;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
 
     const cards = cardRefs.current.filter(Boolean);
     if (cards.length === 0) return undefined;
+
+    // Always force a visible baseline so cards can never stay hidden.
+    cards.forEach((card) => {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    });
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
 
     const trigger = ScrollTrigger.create({
       trigger: sectionRef.current,
@@ -133,15 +140,13 @@ export default function Services() {
       once: true,
       onEnter: () => {
         hasAnimated.current = true;
-        gsap.fromTo(
+        gsap.from(
           cards,
-          { y: 60, opacity: 0 },
           {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power3.out',
-          stagger: 0.1,
+            y: 40,
+            duration: 0.8,
+            ease: 'power3.out',
+            stagger: 0.1,
             overwrite: 'auto',
           },
         );
