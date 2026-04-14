@@ -62,7 +62,7 @@ function ServiceCard({ service, onRef }) {
   return (
     <article
       ref={onRef}
-      className="h-auto min-h-[300px]"
+      className="h-auto min-h-[300px] w-full sm:w-[calc(50%-12px)] xl:w-[calc(33.333%-16px)]"
       style={{ perspective: '1000px' }}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
@@ -163,7 +163,7 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-12 flex flex-wrap justify-center gap-6">
           {SERVICES.map((service, index) => (
             <ServiceCard
               key={service.id}
