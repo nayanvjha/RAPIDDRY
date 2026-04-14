@@ -17,7 +17,7 @@ const ICON_MAP = {
   LayoutGrid,
 };
 
-function ServiceCard({ service, onRef }) {
+function ServiceCard({ service, onRef, className = '' }) {
   const Icon = ICON_MAP[service.icon] ?? Shirt;
   const cardRef = useRef(null);
   const glowRef = useRef(null);
@@ -62,7 +62,7 @@ function ServiceCard({ service, onRef }) {
   return (
     <article
       ref={onRef}
-      className="h-auto min-h-[300px] w-full sm:w-[calc(50%-12px)] xl:w-[calc(33.333%-16px)]"
+      className={`col-span-1 h-auto min-h-[300px] xl:col-span-2 ${className}`}
       style={{ perspective: '1000px' }}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
@@ -71,11 +71,11 @@ function ServiceCard({ service, onRef }) {
         ref={cardRef}
         className="relative h-full w-full rounded-[20px] [transform-style:preserve-3d] transition-[transform] duration-150 ease-out"
       >
-        <div ref={borderRef} className="absolute inset-0 rounded-[20px] p-[1px]">
-          <div className="relative h-full w-full rounded-[19px] border border-[rgba(214,185,123,0.15)] bg-[rgba(24,63,58,0.95)] p-5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] sm:p-8">
+        <div ref={borderRef} className="absolute inset-0 overflow-hidden rounded-[20px] p-[1px]">
+          <div className="relative h-full w-full overflow-hidden rounded-[19px] border border-[rgba(214,185,123,0.15)] bg-[rgba(24,63,58,0.95)] p-5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] sm:p-8">
             <div ref={glowRef} className="pointer-events-none absolute inset-0 rounded-[19px]" />
 
-            <div className="relative z-10 flex h-full flex-col">
+            <div className="relative z-10 flex h-full flex-col pb-2">
               <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-gold/15 text-gold">
                 <Icon size={40} />
               </span>
@@ -101,7 +101,7 @@ function ServiceCard({ service, onRef }) {
                 href={`https://wa.me/917070311787?text=Hi, I'd like to book ${service.name}`}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-auto w-full rounded-full bg-gold px-5 py-3 font-body text-sm font-semibold uppercase tracking-[0.08em] text-forest-dark transition-transform duration-200 hover:scale-[1.02] text-center inline-block"
+                className="mt-6 w-full rounded-full bg-gold px-5 py-3 font-body text-sm font-semibold uppercase tracking-[0.08em] text-forest-dark transition-transform duration-200 hover:scale-[1.02] text-center inline-block"
               >
                 Book Now
               </a>
@@ -163,11 +163,12 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-6">
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-6">
           {SERVICES.map((service, index) => (
             <ServiceCard
               key={service.id}
               service={service}
+              className={index === SERVICES.length - 1 && SERVICES.length % 2 === 1 ? 'xl:col-start-3' : ''}
               onRef={(node) => {
                 cardRefs.current[index] = node;
               }}
