@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import useMagnetic from '../../hooks/useMagnetic';
 import { trackConversion } from '../../utils/gtag';
+import { buildWhatsAppUrl, DEFAULT_WHATSAPP_MESSAGE } from '../../utils/whatsapp';
 
 const NAV_LINKS = [
   { label: 'Services', to: '/services', type: 'page' },
@@ -25,6 +26,7 @@ export default function Navbar() {
   const menuRef = useRef(null);
   const menuLinkRefs = useRef([]);
   const ctaMagnetic = useMagnetic(12);
+  const whatsappUrl = buildWhatsAppUrl(DEFAULT_WHATSAPP_MESSAGE);
 
   const registerMenuLinkRef = (el) => {
     if (el && !menuLinkRefs.current.includes(el)) {
@@ -174,7 +176,7 @@ export default function Navbar() {
 
           <div className="hidden items-center gap-4 lg:flex">
             <a
-              href="https://wa.me/917667625880"
+              href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackConversion('contact')}
@@ -257,7 +259,7 @@ export default function Navbar() {
             )
           )}
           <a
-            href="https://wa.me/917667625880"
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 text-left font-body text-lg text-gold"

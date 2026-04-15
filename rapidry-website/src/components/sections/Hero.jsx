@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ArrowDown, Phone } from 'lucide-react';
 import useMagnetic from '../../hooks/useMagnetic';
+import { buildWhatsAppUrl, DEFAULT_WHATSAPP_MESSAGE } from '../../utils/whatsapp';
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -14,6 +15,7 @@ export default function Hero() {
   const scrollHintRef = useRef(null);
   const primaryMagnetic = useMagnetic(18);
   const secondaryMagnetic = useMagnetic(12);
+  const heroWhatsAppUrl = buildWhatsAppUrl(DEFAULT_WHATSAPP_MESSAGE);
 
   const smoothScrollTo = (id) => {
     const target = document.getElementById(id);
@@ -137,7 +139,7 @@ export default function Hero() {
 
         <div ref={ctaRef} className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href="https://wa.me/917070311787?text=Hi, I'd like to place an order"
+            href={heroWhatsAppUrl}
             target="_blank"
             rel="noreferrer"
             ref={primaryMagnetic.ref}

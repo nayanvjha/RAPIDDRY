@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import useHeaderReveal from '../../hooks/useHeaderReveal';
+import { buildWhatsAppUrl, SERVICES_OVERVIEW } from '../../utils/whatsapp';
 
 const SERVICE_CONFIG = [
   {
@@ -163,8 +164,8 @@ export default function PriceCalculator() {
 
   const pickupEstimate = buildDateLabel(1);
   const savings = grandTotal > 200 ? Math.round(grandTotal * 0.15) : 0;
-  const whatsappMessage = `Hi RAPIDRY! I would like to book a laundry pickup. My estimated total is ${formatMoney(grandTotal)}.`;
-  const whatsappUrl = `https://wa.me/917667625880?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappMessage = `Hi RAPIDRY! I want to book laundry services (${SERVICES_OVERVIEW}). My estimated total is ${formatMoney(grandTotal)}. Please confirm pickup slot, final pricing, and turnaround time.`;
+  const whatsappUrl = buildWhatsAppUrl(whatsappMessage);
 
   const itemQuantity = (serviceKey, itemName) => quantities[`${serviceKey}__${itemName}`] ?? 0;
 

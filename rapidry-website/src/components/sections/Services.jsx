@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { Briefcase, Flame, Footprints, LayoutGrid, ShieldCheck, Shirt, Sparkles } from 'lucide-react';
 import { SERVICES } from '../../data/brand';
 import useHeaderReveal from '../../hooks/useHeaderReveal';
+import { buildServiceBookingMessage, buildWhatsAppUrl } from '../../utils/whatsapp';
 
 const ICON_MAP = {
   Shirt,
@@ -18,6 +19,7 @@ function ServiceCard({ service, onRef }) {
   const cardRef = useRef(null);
   const glowRef = useRef(null);
   const borderRef = useRef(null);
+  const serviceWhatsAppUrl = buildWhatsAppUrl(buildServiceBookingMessage(service.name));
 
   const handleMouseMove = (event) => {
     const card = cardRef.current;
@@ -94,7 +96,7 @@ function ServiceCard({ service, onRef }) {
               </ul>
 
               <a
-                href={`https://wa.me/917070311787?text=Hi, I'd like to book ${service.name}`}
+                href={serviceWhatsAppUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-6 block w-full rounded-full bg-gold px-5 py-3 text-center font-body text-sm font-semibold uppercase tracking-[0.08em] text-forest-dark transition-transform duration-200 hover:scale-[1.02]"

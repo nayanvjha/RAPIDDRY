@@ -1,6 +1,7 @@
 import { Instagram, Linkedin, Twitter, Heart } from 'lucide-react';
 import StartupIndiaBadge from '../StartupIndiaBadge';
 import { trackConversion } from '../../utils/gtag';
+import { buildWhatsAppUrl, DEFAULT_WHATSAPP_MESSAGE, WHATSAPP_DISPLAY_NUMBER } from '../../utils/whatsapp';
 
 const SERVICE_LINKS = ['Wash & Fold', 'Wash & Iron', 'Dry Clean', 'Steam Iron', 'Shoe Care', 'Bag Care'];
 const COMPANY_LINKS = [
@@ -23,6 +24,8 @@ function scrollToId(id) {
 }
 
 export default function Footer() {
+  const whatsappUrl = buildWhatsAppUrl(DEFAULT_WHATSAPP_MESSAGE);
+
   return (
     <footer>
       <section className="bg-gold px-4 py-[60px] text-center text-forest-dark sm:px-6">
@@ -115,8 +118,8 @@ export default function Footer() {
                 <a href="mailto:enquiries@rapidry.in" onClick={() => trackConversion('contact')} className="block font-body text-sm text-gold hover:opacity-80">
                   enquiries@rapidry.in
                 </a>
-                <a href="https://wa.me/917667625880" target="_blank" rel="noopener noreferrer" onClick={() => trackConversion('contact')} className="block font-body text-sm text-cream/70 hover:text-cream">
-                  WhatsApp (+91 7667625880)
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackConversion('contact')} className="block font-body text-sm text-cream/70 hover:text-cream">
+                  WhatsApp ({WHATSAPP_DISPLAY_NUMBER})
                 </a>
                 <a href="https://www.instagram.com/rapidry.in" target="_blank" rel="noreferrer" className="block font-body text-sm text-cream/70 hover:text-cream">
                   Instagram
