@@ -163,6 +163,7 @@ export default function PriceCalculator() {
   }, [grandTotal]);
 
   const pickupEstimate = buildDateLabel(1);
+  const deliveryEstimate = activeService === 'steamIron' ? '40 mins' : '4 hrs';
   const savings = grandTotal > 200 ? Math.round(grandTotal * 0.15) : 0;
   const whatsappMessage = `Hi RAPIDRY! I want to book laundry services (${SERVICES_OVERVIEW}). My estimated total is ${formatMoney(grandTotal)}. Please confirm pickup slot, final pricing, and turnaround time.`;
   const whatsappUrl = buildWhatsAppUrl(whatsappMessage);
@@ -268,7 +269,7 @@ export default function PriceCalculator() {
             <p className="mt-2 font-display text-3xl font-bold leading-none text-gold sm:text-4xl md:text-5xl lg:text-6xl">{formatMoney(displayTotal)}</p>
 
             <p className="mt-4 font-body text-sm text-cream/70">
-              Pickup by {pickupEstimate} • Delivered in 4 hrs
+              Pickup by {pickupEstimate} • Delivered in {deliveryEstimate}
             </p>
 
             {savings > 0 && (
