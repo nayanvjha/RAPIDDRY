@@ -18,7 +18,7 @@ const verifyToken = async (req, res, next) => {
       // Bypass for UI testing
       decoded = {
         uid: 'test-user-firebase-uid',
-        phone_number: '+918306581102', // Default test number, can be anything
+        phone_number: '+917667625880', // Default test number, can be anything
       };
     } else {
       decoded = await admin.auth().verifyIdToken(idToken);

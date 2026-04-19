@@ -250,5 +250,5 @@ This Change Request is submitted per **Clause 9** of the Software Development Ag
 
 ---
 
-*Prepared by Nayan Kumar | Contact: +91 83065 81102 | jhavatsak217@gmail.com*
+*Prepared by Nayan Kumar | Contact: +91 76676 25880 | jhavatsak217@gmail.com*
 *This document is confidential and intended solely for the use of the client.*

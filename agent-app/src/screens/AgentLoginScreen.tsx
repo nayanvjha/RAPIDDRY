@@ -18,7 +18,7 @@ import { BodyM, Button, DisplayL, LabelM } from '../components/ui';
 export const AgentLoginScreen = () => {
   const setAuth = useAgentAuthStore((state) => state.setAuth);
 
-  const [phone, setPhone] = useState('9876543210');
+  const [phone, setPhone] = useState('7667625880');
   const [password, setPassword] = useState('agent123');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
