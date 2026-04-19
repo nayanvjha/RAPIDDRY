@@ -47,11 +47,42 @@ export default function BlogPostPage() {
   const loadPost = useCallback((params) => getBlogPostBySlug(params?.slug), []);
   const { data: post, loading, error } = useSanityQuery(loadPost, { slug });
 
-  const loadAdjacentPosts = useCallback((params) => getAdjacentPosts(params?.date), []);
+  const loadAdjacentPosts = useCallback((params) => {
+    if (!params?.date) {
+      return null;
+    }
+    return getAdjacentPosts(params.date);
+  }, []);
   const { data: adjacentPosts } = useSanityQuery(
     loadAdjacentPosts,
     post?.date ? { date: post.date } : null
   );
+
+  useEffect(() => {
+    const previousTitle = document.title;
+
+    if (!post) {
+      return () => {
+        document.title = previousTitle;
+      };
+    }
+
+    const title = `${post.title} | RAPIDRY Blog`;
+    const description = post.excerpt || 'Read expert garment-care insights from RAPIDRY.';
+    const image = post.coverImage
+      ? urlFor(post.coverImage).width(1200).height(630).fit('crop').auto('format').url()
+      : 'https://rapidry.in/IMG_new.png';
+
+    document.title = title;
+    setMetaTag('name', 'description', description);
+    setMetaTag('property', 'og:title', title);
+    setMetaTag('property', 'og:description', description);
+    setMetaTag('property', 'og:image', image);
+
+    return () => {
+      document.title = previousTitle;
+    };
+  }, [post]);
 
   if (loading) {
     return (
@@ -122,32 +153,6 @@ export default function BlogPostPage() {
 
   const previousPost = adjacentPosts?.previous ?? null;
   const nextPost = adjacentPosts?.next ?? null;
-
-  useEffect(() => {
-    const previousTitle = document.title;
-
-    if (!post) {
-      return () => {
-        document.title = previousTitle;
-      };
-    }
-
-    const title = `${post.title} | RAPIDRY Blog`;
-    const description = post.excerpt || 'Read expert garment-care insights from RAPIDRY.';
-    const image = post.coverImage
-      ? urlFor(post.coverImage).width(1200).height(630).fit('crop').auto('format').url()
-      : 'https://rapidry.in/IMG_new.png';
-
-    document.title = title;
-    setMetaTag('name', 'description', description);
-    setMetaTag('property', 'og:title', title);
-    setMetaTag('property', 'og:description', description);
-    setMetaTag('property', 'og:image', image);
-
-    return () => {
-      document.title = previousTitle;
-    };
-  }, [post]);
 
   return (
     <section className="bg-cream px-4 py-[100px] text-forest-dark sm:px-6">
