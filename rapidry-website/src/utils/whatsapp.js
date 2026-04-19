@@ -5,7 +5,7 @@ export const WHATSAPP_NUMBER = `${WHATSAPP_COUNTRY_CODE}${WHATSAPP_LOCAL_NUMBER}
 export const WHATSAPP_DISPLAY_NUMBER = `+${WHATSAPP_COUNTRY_CODE} ${WHATSAPP_LOCAL_NUMBER}`;
 
 export const SERVICES_OVERVIEW =
-  'Wash & Fold, Wash & Iron, Dry Clean, Steam Iron, Shoe Cleaning, Bag Cleaning';
+  'Wash & Fold, Wash & Iron, Dry Clean, Stain Removal, Steam Iron, Shoe Cleaning, Bag Cleaning';
 
 export const DEFAULT_WHATSAPP_MESSAGE =
   `Hi RAPIDRY! I want to book laundry services: ${SERVICES_OVERVIEW}. Please share pickup slot, pricing, and turnaround time.`;

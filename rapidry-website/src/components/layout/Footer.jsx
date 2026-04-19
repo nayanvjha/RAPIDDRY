@@ -3,7 +3,7 @@ import StartupIndiaBadge from '../StartupIndiaBadge';
 import { trackConversion } from '../../utils/gtag';
 import { buildWhatsAppUrl, DEFAULT_WHATSAPP_MESSAGE, WHATSAPP_DISPLAY_NUMBER } from '../../utils/whatsapp';
 
-const SERVICE_LINKS = ['Wash & Fold', 'Wash & Iron', 'Dry Clean', 'Steam Iron', 'Shoe Care', 'Bag Care'];
+const SERVICE_LINKS = ['Wash & Fold', 'Wash & Iron', 'Dry Clean', 'Stain Removal', 'Steam Iron', 'Shoe Care', 'Bag Care'];
 const COMPANY_LINKS = [
   { label: 'About', id: 'top' },
   { label: 'How It Works', id: 'how-it-works' },

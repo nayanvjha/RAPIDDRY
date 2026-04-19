@@ -36,6 +36,14 @@ export const SERVICES = [
     icon: 'ShieldCheck',
   },
   {
+    id: 'stain-removal',
+    name: 'Stain Removal',
+    timing: 'Ready in 4 hours',
+    description: 'Targeted stain treatment for tough marks like oil, ink, wine, and food using specialized solvents.',
+    features: ['Stain-type analysis', 'Pre-treatment soak', 'Fabric-safe solvents', 'Post-treatment inspection'],
+    icon: 'Droplets',
+  },
+  {
     id: 'steam-iron',
     name: 'Steam Iron',
     timing: 'Ready in 40 minutes',

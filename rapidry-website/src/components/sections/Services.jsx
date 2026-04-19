@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Briefcase, Flame, Footprints, LayoutGrid, ShieldCheck, Shirt, Sparkles } from 'lucide-react';
+import { Briefcase, Droplets, Flame, Footprints, LayoutGrid, ShieldCheck, Shirt, Sparkles } from 'lucide-react';
 import { SERVICES } from '../../data/brand';
 import useHeaderReveal from '../../hooks/useHeaderReveal';
 import { buildServiceBookingMessage, buildWhatsAppUrl } from '../../utils/whatsapp';
@@ -8,6 +8,7 @@ const ICON_MAP = {
   Shirt,
   Sparkles,
   ShieldCheck,
+  Droplets,
   Flame,
   Footprints,
   Briefcase,

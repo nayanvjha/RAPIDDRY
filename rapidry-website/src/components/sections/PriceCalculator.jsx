@@ -40,6 +40,17 @@ const SERVICE_CONFIG = [
     ],
   },
   {
+    key: 'stainRemoval',
+    label: 'Stain Removal',
+    items: [
+      { name: 'Shirt', price: 99 },
+      { name: 'T-Shirt', price: 79 },
+      { name: 'Trouser', price: 99 },
+      { name: 'Saree', price: 149 },
+      { name: 'Kurta', price: 99 },
+    ],
+  },
+  {
     key: 'steamIron',
     label: 'Steam Iron',
     items: [
