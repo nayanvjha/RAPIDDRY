@@ -6,7 +6,7 @@ import { trackConversion } from '../../utils/gtag';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const COVERED_SECTORS = new Set([]);
+const COVERED_SECTORS = new Set(Array.from({ length: 50 }, (_, index) => `SEC ${index + 1}`));
 
 const ZONES = [
   'Golf Course Road',
@@ -38,13 +38,13 @@ export default function CoverageMap() {
 
   const sectors = useMemo(() => {
     const list = [];
-    const cols = 6;
+    const cols = 10;
     const rows = 5;
 
     for (let index = 0; index < cols * rows; index += 1) {
       const row = Math.floor(index / cols);
       const col = index % cols;
-      const label = `SEC ${30 + index}`;
+      const label = `SEC ${index + 1}`;
       list.push({
         id: `${label}-${index}`,
         label,
@@ -143,7 +143,7 @@ export default function CoverageMap() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center">
           <p data-reveal="eyebrow" className="font-body text-xs font-medium uppercase tracking-[0.24em] text-gold">
-            LAUNCHING SOON
+            LAUNCHING IN JUNE
           </p>
           <h2 className="mt-4 overflow-hidden font-display text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
             <span data-reveal="title" className="block">
