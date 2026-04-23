@@ -158,8 +158,8 @@ export default function CoverageMap() {
         <div className="mx-auto mt-12 max-w-3xl">
           <p className="mb-3 text-center font-body text-xs text-forest-dark/65 md:hidden">&larr; Scroll to explore &rarr;</p>
           <div ref={mapFrameRef} className="relative overflow-x-auto rounded-3xl bg-forest-dark p-4 sm:p-8 md:p-12">
-            <div className="mx-auto min-w-[420px] md:min-w-0">
-              <div className="grid grid-cols-6 gap-2 sm:gap-3 md:gap-4">
+              <div className="mx-auto min-w-[640px] md:min-w-0">
+                <div className="grid grid-cols-10 gap-2 sm:gap-3 md:gap-4">
               {sectors.map((sector, index) => (
                 <div
                   key={sector.id}
