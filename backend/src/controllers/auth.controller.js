@@ -1,4 +1,5 @@
 const admin = require('../config/firebase');
+const bcrypt = require('bcryptjs');
 const { db } = require('../config/database');
 const { generateToken } = require('../utils/jwt');
 
@@ -151,8 +152,63 @@ const updateProfile = async (req, res, next) => {
   }
 };
 
+const adminLogin = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'email and password are required',
+      });
+    }
+
+    const user = await db('users')
+      .where({
+        email: String(email).trim(),
+        role: 'admin',
+        is_active: true,
+      })
+      .first();
+
+    if (!user || !user.password_hash) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid credentials',
+      });
+    }
+
+    const isMatch = await bcrypt.compare(String(password), user.password_hash);
+
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid credentials',
+      });
+    }
+
+    const token = generateToken(user.id, user.role);
+
+    return res.json({
+      success: true,
+      data: {
+        token,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
+      },
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   verifyToken,
   getMe,
   updateProfile,
+  adminLogin,
 };

@@ -4,6 +4,16 @@ const { sendPushNotification } = require('../services/notification.service');
 
 const DEFAULT_PAGE = 1;
 const DEFAULT_LIMIT = 20;
+const VALID_ORDER_STATUSES = [
+  'placed',
+  'agent_assigned',
+  'picked_up',
+  'at_partner',
+  'processing',
+  'out_for_delivery',
+  'delivered',
+  'cancelled',
+];
 
 const normalizePagination = (query) => {
   const page = Math.max(1, Number(query.page) || DEFAULT_PAGE);
@@ -535,6 +545,155 @@ const getAllCoupons = async (req, res, next) => {
   }
 };
 
+const updateOrderStatus = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    if (!status || !VALID_ORDER_STATUSES.includes(status)) {
+      return ApiResponse.error(
+        res,
+        `status must be one of: ${VALID_ORDER_STATUSES.join(', ')}`,
+        400
+      );
+    }
+
+    const [order] = await db('orders')
+      .where({ id })
+      .update(
+        {
+          status,
+          updated_at: db.fn.now(),
+        },
+        '*'
+      );
+
+    if (!order) {
+      return ApiResponse.error(res, 'Order not found', 404);
+    }
+
+    return ApiResponse.success(res, order);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+const getAllServicesAdmin = async (req, res, next) => {
+  try {
+    const serviceItems = await db('service_items as si')
+      .join('services as s', 's.id', 'si.service_id')
+      .select(
+        'si.id',
+        'si.name',
+        'si.price',
+        'si.unit',
+        'si.is_active',
+        'si.service_id',
+        's.name as service_name'
+      )
+      .orderBy('s.display_order', 'asc')
+      .orderBy('si.display_order', 'asc');
+
+    return ApiResponse.success(res, serviceItems);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+const updateCoupon = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const {
+      code,
+      discount_type: discountType,
+      discount_value: discountValue,
+      min_order: minOrder,
+      max_discount: maxDiscount,
+      expires_at: expiresAt,
+      usage_limit: usageLimit,
+      is_active: isActive,
+    } = req.body;
+
+    const updatePayload = {};
+
+    if (code !== undefined) {
+      updatePayload.code = String(code).trim().toUpperCase();
+    }
+
+    if (discountType !== undefined) {
+      if (!['flat', 'percent'].includes(discountType)) {
+        return ApiResponse.error(res, 'discount_type must be flat or percent', 400);
+      }
+      updatePayload.discount_type = discountType;
+    }
+
+    if (discountValue !== undefined) {
+      updatePayload.discount_value = Number(discountValue);
+    }
+
+    if (minOrder !== undefined) {
+      updatePayload.min_order = Number(minOrder);
+    }
+
+    if (maxDiscount !== undefined) {
+      updatePayload.max_discount = maxDiscount === null ? null : Number(maxDiscount);
+    }
+
+    if (expiresAt !== undefined) {
+      updatePayload.expires_at = expiresAt ? new Date(expiresAt) : null;
+    }
+
+    if (usageLimit !== undefined) {
+      updatePayload.usage_limit = usageLimit === null ? null : Number(usageLimit);
+    }
+
+    if (isActive !== undefined) {
+      updatePayload.is_active = Boolean(isActive);
+    }
+
+    if (Object.keys(updatePayload).length === 0) {
+      return ApiResponse.error(
+        res,
+        'At least one updatable field is required',
+        400
+      );
+    }
+
+    updatePayload.updated_at = db.fn.now();
+
+    const [coupon] = await db('coupons')
+      .where({ id })
+      .update(updatePayload, '*');
+
+    if (!coupon) {
+      return ApiResponse.error(res, 'Coupon not found', 404);
+    }
+
+    return ApiResponse.success(res, coupon);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+const deleteCoupon = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const deletedCount = await db('coupons').where({ id }).del();
+
+    if (!deletedCount) {
+      return ApiResponse.error(res, 'Coupon not found', 404);
+    }
+
+    return res.json({
+      success: true,
+      message: 'Coupon deleted',
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 const updateServicePricing = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -630,6 +789,10 @@ module.exports = {
   getAllPartners,
   createCoupon,
   getAllCoupons,
+  updateOrderStatus,
+  getAllServicesAdmin,
+  updateCoupon,
+  deleteCoupon,
   updateServicePricing,
   getAnalytics,
 };

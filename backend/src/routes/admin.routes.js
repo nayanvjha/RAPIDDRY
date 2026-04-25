@@ -13,6 +13,10 @@ const {
   getAllPartners,
   createCoupon,
   getAllCoupons,
+  updateOrderStatus,
+  getAllServicesAdmin,
+  updateCoupon,
+  deleteCoupon,
   updateServicePricing,
   getAnalytics,
 } = require('../controllers/admin.controller');
@@ -25,13 +29,17 @@ router.get('/dashboard', getDashboardStats);
 router.get('/orders', getAllOrders);
 router.get('/orders/:id', getOrderDetail);
 router.patch('/orders/:id/assign', assignAgent);
+router.patch('/orders/:id/status', updateOrderStatus);
 router.get('/agents', getAllAgents);
 router.post('/agents', createAgent);
 router.patch('/agents/:id/suspend', suspendAgent);
 router.get('/customers', getAllCustomers);
 router.get('/partners', getAllPartners);
+router.get('/services', getAllServicesAdmin);
 router.post('/coupons', createCoupon);
 router.get('/coupons', getAllCoupons);
+router.patch('/coupons/:id', updateCoupon);
+router.delete('/coupons/:id', deleteCoupon);
 router.put('/services/:id', updateServicePricing);
 router.get('/analytics', getAnalytics);
 

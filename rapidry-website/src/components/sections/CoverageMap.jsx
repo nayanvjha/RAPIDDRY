@@ -3,10 +3,22 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import useHeaderReveal from '../../hooks/useHeaderReveal';
 import { trackConversion } from '../../utils/gtag';
+import { WAITLIST_SECTORS, toCoverageSectorLabel } from '../../constants/sectors';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const COVERED_SECTORS = new Set(Array.from({ length: 50 }, (_, index) => `SEC ${index + 1}`));
+const ACTIVE_COVERAGE_SECTORS = new Set(
+  WAITLIST_SECTORS
+    .map((sector) => toCoverageSectorLabel(sector))
+    .filter((sectorLabel) => {
+      if (!sectorLabel) {
+        return false;
+      }
+
+      const sectorNumber = Number(sectorLabel.replace('SEC ', ''));
+      return Number.isFinite(sectorNumber) && sectorNumber >= 1 && sectorNumber <= 50;
+    })
+);
 
 const ZONES = [
   'Golf Course Road',
@@ -50,7 +62,7 @@ export default function CoverageMap() {
         label,
         row,
         col,
-        covered: COVERED_SECTORS.has(label),
+        covered: ACTIVE_COVERAGE_SECTORS.has(label),
       });
     }
 
@@ -169,11 +181,11 @@ export default function CoverageMap() {
                   data-cx={sector.col - 2.5}
                   data-cy={sector.row - 2}
                   className={`relative flex h-[56px] w-[56px] flex-col items-center justify-center text-center transition duration-200 sm:h-[70px] sm:w-[70px] md:h-[86px] md:w-[86px] ${
-                    sector.covered ? 'cursor-pointer' : 'cursor-pointer'
+                    sector.covered ? 'cursor-pointer' : 'cursor-default'
                   } ${sector.row % 2 === 1 ? 'translate-x-3 sm:translate-x-5 md:translate-x-6' : ''}`}
                   style={{ clipPath: hexClip }}
-                  onMouseEnter={(event) => handleEnter(event, sector)}
-                  onMouseMove={(event) => handleMove(event, sector)}
+                  onMouseEnter={sector.covered ? (event) => handleEnter(event, sector) : undefined}
+                  onMouseMove={sector.covered ? (event) => handleMove(event, sector) : undefined}
                   onMouseLeave={handleLeave}
                 >
                   <div
