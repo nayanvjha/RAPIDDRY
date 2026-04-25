@@ -166,20 +166,29 @@ function OfferCard({ submitConfig, source, onClaimSuccess }) {
         </span>
       </div>
 
-      <h2 className="mx-auto mt-6 max-w-xl overflow-hidden text-center font-display text-2xl font-bold leading-tight text-cream sm:text-3xl md:text-4xl lg:text-[42px]">
-        <span className="block">
-          50% off on your first order.
+      <h2 className="mx-auto mt-6 max-w-xl overflow-hidden text-center font-display leading-tight text-cream">
+        <span className="block text-xl font-semibold tracking-[0.015em] text-cream/90 sm:text-2xl">
+          Avail
+        </span>
+        <span className="offer-glow-pulse mx-auto mt-1 block w-fit bg-gradient-to-r from-[#F6E4C4] via-[#D4A76A] to-[#FDF0D8] bg-[length:200%_100%] bg-clip-text px-1 text-[2.25rem] font-extrabold uppercase leading-none text-transparent animate-shimmer sm:text-[2.9rem] md:text-[3.35rem]">
+          UPTO 60% OFF
+        </span>
+        <span className="mt-3 block text-lg font-medium text-cream/90 sm:text-xl">
+          on your first{' '}
+          <span className="inline-flex items-center rounded-full border border-gold/45 bg-gold/12 px-3 py-1 text-base font-semibold text-[#F9D9AD] sm:text-lg">
+            3 orders
+          </span>
         </span>
       </h2>
       <p className="mt-4 text-center font-body text-sm text-cream/70">
-        Exclusive discount for early members in Gurugram.
+        Exclusive multi-order discount for early members in Gurugram.
       </p>
 
       {submitStatus === 'success' ? (
         <div className="mt-8 rounded-2xl border border-emerald-400/45 bg-emerald-500/12 p-5 text-center">
           <div className="flex items-center justify-center gap-2 text-emerald-300">
             <CheckCircle2 size={18} />
-            <p className="font-body text-sm font-semibold">Thanks! We&apos;ve reserved your 50% off spot. We&apos;ll reach out shortly on WhatsApp.</p>
+            <p className="font-body text-sm font-semibold">Thanks! We&apos;ve reserved your 60% off spot for 3 orders. We&apos;ll reach out shortly on WhatsApp.</p>
           </div>
         </div>
       ) : (
@@ -352,7 +361,7 @@ export default function WaitlistOffer() {
             onClick={closeModal}
           />
 
-          <div className="relative z-10 w-full max-w-[680px]">
+          <div className="modal-pop-in relative z-10 w-full max-w-[680px]">
             <button
               type="button"
               aria-label="Close"
